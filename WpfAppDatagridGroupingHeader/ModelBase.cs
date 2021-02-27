@@ -6,6 +6,7 @@ namespace WpfAppDatagridGroupingHeader
     public class ModelBase
     {
 
+        public int ID { get; set; }
 
         public string Caption { get; set; }
         public string c1 { get;   set; }

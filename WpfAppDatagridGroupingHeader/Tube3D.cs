@@ -185,7 +185,7 @@ namespace WpfAppDatagridGroupingHeader
 
         }
 
-        public Tube3D(TubeModel x)
+        public Tube3D(PipeModel x)
         {
             this.StartPosition = x.StartPosition;
             this.EndPosition = x.EndPosition;
@@ -221,23 +221,22 @@ namespace WpfAppDatagridGroupingHeader
             group.Children.Add(geometryModel);
            
             this.Visual3DModel = group;// group;
-            TubeModel = x;
+            PipeModel = x;
         }
 
-        public int Id => TubeModel.Id;
-        public string c1 => TubeModel.c1;
-        public string c2 => TubeModel.c2;
-        public string c3 => TubeModel.c3;
-        public double c4 => TubeModel.c4;
+        public int Id => PipeModel.ID;
+        public string c1 => PipeModel.c1;
+        public string c2 => PipeModel.c2; 
+        public double c4 => PipeModel.c4;
 
-        public List<double> c5 => TubeModel.c5;
-
+        public List<double> c5 => PipeModel.c5;
 
 
-        [Category("Conections")]
-        [Description("This property is a complex property and has no default editor.")]
-        [ExpandableObject]
-        public Person Spouse { get; set; }
+
+        //[Category("Conections")]
+        //[Description("This property is a complex property and has no default editor.")]
+        //[ExpandableObject]
+        //public Person Spouse { get; set; }
 
         public Point3D StartPosition
         {
@@ -250,6 +249,6 @@ namespace WpfAppDatagridGroupingHeader
             set { this.SetValue(EndPositionProperty, value); }
         }
 
-        public TubeModel TubeModel { get; }
+        public PipeModel PipeModel { get; }
     }
 }

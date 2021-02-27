@@ -6,11 +6,11 @@ namespace WpfAppDatagridGroupingHeader
     public class PipeModel :ModelBase
     {
         internal string c3;
-        public int Id;
+ 
 
         public PipeModel(int v)
         {
-            this.Id = v;
+            this.ID = v;
         }
         public Point3D StartPosition { get; internal set; }
         public Point3D EndPosition { get; internal set; }

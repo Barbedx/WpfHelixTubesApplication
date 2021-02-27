@@ -174,7 +174,7 @@ namespace WpfAppDatagridGroupingHeader
                         newCell.Paragraphs.First().Append(templateCellValue);               //для удобства дальнейшей обработки
 
 
-                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.TubeModel)); // заменяем текст в новом столбце
+                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.PipeModel)); // заменяем текст в новом столбце
 
                     }
                 }
