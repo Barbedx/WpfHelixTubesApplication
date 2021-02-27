@@ -68,7 +68,7 @@ namespace WpfAppDatagridGroupingHeader
                     c5 = new List<double>{1,2,3},
                     Spouse = new Person{FirstName="lol",LastName = "kek"},
                     StartPosition=new Point3D(0,0,0),
-                    EndPosition=new Point3D(0,0,5)
+                    EndPosition=new Point3D(0,10,0)
                 },
                 new TubeModel(2)
                 {
@@ -76,8 +76,8 @@ namespace WpfAppDatagridGroupingHeader
                     c2 = "2kek",
                     c3 = "2www",
                     c4 = 0.005,
-                    StartPosition=new Point3D(10,0,0),
-                    EndPosition=new Point3D(10,0,5)
+                    StartPosition=new Point3D(0,10,0),
+                    EndPosition=new Point3D(0,20,0)
 
                 },
                 new TubeModel(3)
@@ -86,13 +86,13 @@ namespace WpfAppDatagridGroupingHeader
                     c2 = "3kek",
                     c3 = "3www",
                     c4 = 0.5,
-                    StartPosition=new Point3D(20,0,0),
-                    EndPosition=new Point3D(20,0,5)
-
+                    StartPosition=new Point3D(0,20,0),
+                    EndPosition=new Point3D(0,30,0)
                 }
             };
 
             Items = new ObservableCollection<Tube3D>(res.Select(x => new Tube3D(x)));
+            
             ItemsText = new ObservableCollection<BillboardTextVisual3D>(
                res.Select(x => new BillboardTextVisual3D { Position = x.EndPosition, Text = x.Id.ToString() }
                 ));

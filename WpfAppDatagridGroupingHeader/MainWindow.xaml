@@ -12,9 +12,9 @@
         <local:UnitsConverter x:Key="UnitConverter"/>
         <converters:BoundsConverter x:Key="BoundsConverter"/>
         <local:DataTemplate3D x:Key="BillboardTemplate">
-            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.4">
+            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
                 <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetY="-5"/>
+                    <TranslateTransform3D OffsetY="{Binding Diametr}"/>
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
@@ -120,11 +120,20 @@
             IsHeadLightEnabled="True"
             ZoomAroundMouseDownPoint="True" 
             RotateAroundMouseDownPoint="True"
+             
+                         
+                        ShowFrameRate="True"
+                        ShowFieldOfView="True"
+                        ShowCoordinateSystem="True"
+                        ShowViewCube="True" 
+                        InfiniteSpin="True"
             
             MouseDown="HelixViewport3D_MouseDown">
                 <h:SunLight/>
+ 
                 <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
                 <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"  RefreshChildrenOnChange="True" />
+                
                 <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
             </h:HelixViewport3D>
 
