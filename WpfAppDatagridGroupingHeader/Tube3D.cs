@@ -125,8 +125,7 @@ namespace WpfAppDatagridGroupingHeader
            // billboardText.Position = TextPosition;
 
         }
-        public readonly GeometryModel3D geometryModel = new GeometryModel3D();
-        private readonly BillboardTextVisual3D billboardText;
+        public readonly GeometryModel3D geometryModel = new GeometryModel3D(); 
 
         public Tube3D( )
         {
@@ -146,13 +145,7 @@ namespace WpfAppDatagridGroupingHeader
             geometryModel.Geometry = gb.ToMesh();
             geometryModel.Material = MaterialHelper.CreateMaterial(Brushes.Blue, freeze: false);
 
-
-
-
-            billboardText = new BillboardTextVisual3D()
-            {
-                Position = EndPosition
-            }
+             
 
             this.Visual3DModel =geometryModel;// group;
 
@@ -160,12 +153,43 @@ namespace WpfAppDatagridGroupingHeader
         }
         public Tube3D(int id  = 0)
         {
-            this.Id = id;
-            billboardText = new BillboardTextVisual3D()
-            {
-                Text = Caption,
-                Position = new Point3D(StartPosition.X, StartPosition.Y, EndPosition.Z + 5)
-            };
+             
+         
+            var gb = new MeshBuilder();
+
+            gb.AddPipe(
+                            point1: this.StartPosition,
+                point2: this.EndPosition,
+                diameter: this.Diametr,
+                innerDiameter: this.InnerDiametr,
+                thetaDiv: this.ThetaDiv
+                );
+
+
+            geometryModel.Geometry = gb.ToMesh();
+            geometryModel.Material = MaterialHelper.CreateMaterial(Brushes.Blue, freeze: false);
+
+            //geometryModel =  new PipeVisual3D()
+            //{
+            //    Point1 = this.StartPosition,
+            //    Point2 = this.EndPosition,
+            //    Diameter = this.Diametr,
+            //    Material = MaterialHelper.CreateMaterial(Brushes.Blue),
+            //    InnerDiameter = this.InnerDiametr,
+            //    ThetaDiv = this.ThetaDiv
+            //};
+
+            //geometryModel.Children.Add(billboardText);
+            //this.MouseDown += Tube3D_MouseDown;  
+            this.Visual3DModel = geometryModel;// group;
+
+        }
+
+        public Tube3D(TubeModel x)
+        {
+            this.StartPosition = x.StartPosition;
+            this.EndPosition = x.EndPosition;
+            
             var gb = new MeshBuilder();
 
             gb.AddPipe(
@@ -192,21 +216,22 @@ namespace WpfAppDatagridGroupingHeader
 
             //geometryModel.Children.Add(billboardText);
             //this.MouseDown += Tube3D_MouseDown;
-            billboardText.FontSize = 20;
+          
             var group = new Model3DGroup();
             group.Children.Add(geometryModel);
-            group.Children.Add(billboardText.Content);
+           
             this.Visual3DModel = group;// group;
-
+            TubeModel = x;
         }
 
-        public int Id { get; set; }
-        public string c1 { get; set; }
-        public string c2 { get; set; }
-        public string c3 { get; set; }
-        public double c4 { get; set; }
+        public int Id => TubeModel.Id;
+        public string c1 => TubeModel.c1;
+        public string c2 => TubeModel.c2;
+        public string c3 => TubeModel.c3;
+        public double c4 => TubeModel.c4;
 
-        public List<double> c5 { get; set; }
+        public List<double> c5 => TubeModel.c5;
+
 
 
         [Category("Conections")]
@@ -224,5 +249,7 @@ namespace WpfAppDatagridGroupingHeader
             get { return (Point3D)this.GetValue(EndPositionProperty); }
             set { this.SetValue(EndPositionProperty, value); }
         }
+
+        public TubeModel TubeModel { get; }
     }
 }

@@ -49,13 +49,14 @@ namespace WpfAppDatagridGroupingHeader
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        //public ObservableCollection<Tube3D> Items { get; set; }
-        public ObservableCollection<TubeModel> Items { get; set; }
+        public ObservableCollection<Tube3D> Items { get; set; }
+        public ObservableCollection<BillboardTextVisual3D> ItemsText { get; set; }
+        //public ObservableCollection<TubeModel> Items { get; set; }
         public MainWindow()
         {
             InitializeComponent();
 
-            Items = new ObservableCollection<TubeModel>()
+            var res = new ObservableCollection<TubeModel>()
 
             {
                 new TubeModel(1)
@@ -91,7 +92,15 @@ namespace WpfAppDatagridGroupingHeader
                 }
             };
 
+            Items = new ObservableCollection<Tube3D>(res.Select(x => new Tube3D(x)));
+            ItemsText = new ObservableCollection<BillboardTextVisual3D>(
+               res.Select(x => new BillboardTextVisual3D { Position = x.EndPosition, Text = x.Id.ToString() }
+                ));
+
             this.DataContext = this;
+
+
+
             //for (int i = 0; i < 100; i++)
             //{
             //    Items.Add(new Tube3D(i)
@@ -165,7 +174,7 @@ namespace WpfAppDatagridGroupingHeader
                         newCell.Paragraphs.First().Append(templateCellValue);               //для удобства дальнейшей обработки
 
 
-                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item)); // заменяем текст в новом столбце
+                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.TubeModel)); // заменяем текст в новом столбце
 
                     }
                 }
@@ -223,11 +232,23 @@ namespace WpfAppDatagridGroupingHeader
             var firstHit = viewport.Viewport.FindHits(e.GetPosition(viewport)).FirstOrDefault();
             if (firstHit != null)
             {
-                var model = firstHit.Visual as Tube3D;
-                var gModel = model.geometryModel;
-                gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
-                e.Handled = true;
-                this.Select(model);
+                if (firstHit.Visual is Tube3D model)
+                {
+                    var gModel = model.geometryModel;
+                    gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
+                    e.Handled = true;
+                    this.Select(model);
+                }
+                if (firstHit.Visual is BillboardTextVisual3D bmodel)
+                {
+              
+
+                    //var gModel = bmodel.geometryModel;
+                    //gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
+                    //e.Handled = true;
+                    //this.Select(model);
+                }
+
             }
             else
             {
@@ -271,11 +292,12 @@ namespace WpfAppDatagridGroupingHeader
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var lastItems = Items.Last();
-            Items.Add(new TubeModel(Items.Max(x => x.Id) + 1)
-            {
-                StartPosition = new Point3D(lastItems.StartPosition.X + 10, lastItems.StartPosition.Y, lastItems.StartPosition.Z),
-                EndPosition = new Point3D(lastItems.EndPosition.X + 10, lastItems.EndPosition.Y, lastItems.EndPosition.Z)
-            });
+            Items.Add(new Tube3D(
+                new TubeModel(Items.Max(x => x.Id) + 1)
+                {
+                    StartPosition = new Point3D(lastItems.StartPosition.X + 10, lastItems.StartPosition.Y, lastItems.StartPosition.Z),
+                    EndPosition = new Point3D(lastItems.EndPosition.X + 10, lastItems.EndPosition.Y, lastItems.EndPosition.Z)
+                }));
         }
 
         private void RemoveClick(object sender, RoutedEventArgs e)
