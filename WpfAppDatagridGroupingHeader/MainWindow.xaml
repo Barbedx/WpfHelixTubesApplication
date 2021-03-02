@@ -105,7 +105,10 @@
                 <xctk:PropertyDefinition   TargetProperties="Caption"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="Spouse"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="StartPosition"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="Position2"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="Position3"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="EndPosition"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="InnerValue"></xctk:PropertyDefinition>
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
         <Grid>
@@ -121,7 +124,7 @@
             ZoomAroundMouseDownPoint="True" 
             RotateAroundMouseDownPoint="True"
              
-                         
+                         x:Name="viewport"
                         ShowFrameRate="True"
                         ShowFieldOfView="True"
                         ShowCoordinateSystem="True"
@@ -130,9 +133,18 @@
             
             MouseDown="HelixViewport3D_MouseDown">
                 <h:SunLight/>
- 
-                <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
+
+                <h:GridLinesVisual3D Fill="Gray"   />
+                <ModelVisual3D>
+                    <!--<h:TubeVisual3D Path="0 0 0  5 0 0  5 5 0 " />
+                    <h:HelixVisual3D Origin="10 0 0"  Radius="5" Length="0"  Turns="0.25" />-->
+                    
+
+                    <!--<h:TubeVisual3D Path="0 0 0  0 10 0  10 10 0 "/>-->
+                </ModelVisual3D>
+                
                 <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"  RefreshChildrenOnChange="True" />
+                <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
                 
                 <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
             </h:HelixViewport3D>
@@ -161,10 +173,10 @@
                 </Grid>
                 <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedObject}" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0"  >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding c1}" Header="column 1" Width="200" x:Name="Column1" />
-                        <DataGridTextColumn Binding = "{Binding c2}" Header="column 2" Width="80" x:Name="Column2"/>
-                        <DataGridTextColumn Binding = "{Binding c3, Converter={StaticResource UnitConverter}, ConverterParameter=1000}" Header="column 3" Width="80" x:Name="Column3"/>
-                        <DataGridTextColumn Binding = "{Binding c4, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"  Header="column 4" Width="*" x:Name="Column4"  />
+                        <DataGridTextColumn Binding=  "{Binding InnerValue.c1}" Header="column 1" Width="200" x:Name="Column1" />
+                        <DataGridTextColumn Binding = "{Binding InnerValue.c2}" Header="column 2" Width="80" x:Name="Column2"/>
+                        <DataGridTextColumn Binding = "{Binding InnerValue.StartPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}" Header="column 3" Width="80" x:Name="Column3"/>
+                        <DataGridTextColumn Binding = "{Binding InnerValue.EndPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"  Header="column 4" Width="*" x:Name="Column4"  />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

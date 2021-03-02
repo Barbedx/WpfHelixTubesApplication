@@ -18,6 +18,12 @@ namespace WpfAppDatagridGroupingHeader
 
     public class TubeModel: ModelBase
     {
-        public Point3DCollection Points { get; set; }   
+        public TubeModel(int v)
+        {
+            V = v;
+        }
+
+        public Point3DCollection Points { get; set; }
+        public int V { get; }
     }
 }

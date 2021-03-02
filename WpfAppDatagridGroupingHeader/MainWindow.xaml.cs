@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -49,57 +50,65 @@ namespace WpfAppDatagridGroupingHeader
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<Tube3D> Items { get; set; }
-        public ObservableCollection<BillboardTextVisual3D> ItemsText { get; set; }
+        public ObservableCollection<ItemModel3D<ItemModel>> Items { get; set; }
         //public ObservableCollection<TubeModel> Items { get; set; }
         public MainWindow()
         {
             InitializeComponent();
 
-            var res = new ObservableCollection<TubeModel>()
+            var res = new ObservableCollection<ItemModel>()
 
             {
-                new TubeModel(1)
+                new ItemModel(1)
                 {
                     c1 = "lol",
                     c2 = "kek",
-                    c3 = "www",
-                    c4 = 0.04,
                     c5 = new List<double>{1,2,3},
                     Spouse = new Person{FirstName="lol",LastName = "kek"},
+                    Diametr  = 10,
                     StartPosition=new Point3D(0,0,0),
-                    EndPosition=new Point3D(0,10,0)
+                    EndPosition=new Point3D(10,0,0),
+                    Radius = 0,
+                    Type = TubeTypes.Regular
                 },
-                new TubeModel(2)
+                new ItemModel(2)
                 {
                     c1 = "2lol",
                     c2 = "2kek",
-                    c3 = "2www",
-                    c4 = 0.005,
-                    StartPosition=new Point3D(0,10,0),
-                    EndPosition=new Point3D(0,20,0)
+                    StartPosition=new Point3D(10,0,0),
+                    EndPosition=new Point3D(20,0,0),
+                    Type = TubeTypes.Regular
 
                 },
-                new TubeModel(3)
+                new ItemModel(3)
                 {
                     c1 = "3lol",
                     c2 = "3kek",
-                    c3 = "3www",
-                    c4 = 0.5,
-                    StartPosition=new Point3D(0,20,0),
-                    EndPosition=new Point3D(0,30,0)
+                    StartPosition=new Point3D(20,0,0),
+                    EndPosition=new Point3D(20,30,0),
+                    Type = TubeTypes.curved,
+                    Radius =30
+                },
+                new ItemModel(4)
+                {
+                    c1 = "4lol",
+                    c2 = "4kek",
+                    StartPosition=new Point3D(20,30,0),
+                    EndPosition=new Point3D(20,40,0),
+                    Type = TubeTypes.Regular,
+                    Radius =30
                 }
             };
-
-            Items = new ObservableCollection<Tube3D>(res.Select(x => new Tube3D(x)));
-            
-            ItemsText = new ObservableCollection<BillboardTextVisual3D>(
-               res.Select(x => new BillboardTextVisual3D { Position = x.EndPosition, Text = x.Id.ToString() }
-                ));
-
+            var allItmes = new List<ItemModel3D<ItemModel>>(res.Where(x => x.Type == TubeTypes.Regular).Select(x => new Tube3D(x)));
+            allItmes.AddRange(res.Where(x => x.Type == TubeTypes.Regular).Select(x => new PipeModel3D(x)));
+            //allItmes.Add()
+            //allItmes.AddRange()
+            //Items = new ObservableCollection<Tube3D>();
+            //Items.Add()
+            Items = new ObservableCollection<ItemModel3D<ItemModel>>(allItmes);
             this.DataContext = this;
-
-
+             
+             
 
             //for (int i = 0; i < 100; i++)
             //{
@@ -174,7 +183,7 @@ namespace WpfAppDatagridGroupingHeader
                         newCell.Paragraphs.First().Append(templateCellValue);               //для удобства дальнейшей обработки
 
 
-                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.PipeModel)); // заменяем текст в новом столбце
+                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.InnerValue)); // заменяем текст в новом столбце
 
                     }
                 }
@@ -193,7 +202,7 @@ namespace WpfAppDatagridGroupingHeader
             }
         }
 
-        private string GetValueByTemplate(string templateCellValue, TubeModel item)
+        private string GetValueByTemplate(string templateCellValue, ItemModel item)
         {
             switch (templateCellValue)
             {
@@ -201,8 +210,6 @@ namespace WpfAppDatagridGroupingHeader
                     return item.c1;
                 case "<last>":
                     return item.c2;
-                case "<price>":
-                    return item.c3;
                 default:
                     return string.Empty;
             }
@@ -232,16 +239,16 @@ namespace WpfAppDatagridGroupingHeader
             var firstHit = viewport.Viewport.FindHits(e.GetPosition(viewport)).FirstOrDefault();
             if (firstHit != null)
             {
-                if (firstHit.Visual is Tube3D model)
+                if (firstHit.Visual is ItemModel3D<ItemModel>  model)
                 {
-                    var gModel = model.geometryModel;
+                    var gModel = model.GeometryModel3D;
                     gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
                     e.Handled = true;
                     this.Select(model);
                 }
                 if (firstHit.Visual is BillboardTextVisual3D bmodel)
                 {
-              
+
 
                     //var gModel = bmodel.geometryModel;
                     //gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
@@ -291,13 +298,24 @@ namespace WpfAppDatagridGroupingHeader
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var lastItems = Items.Last();
-            Items.Add(new Tube3D(
-                new TubeModel(Items.Max(x => x.Id) + 1)
-                {
-                    StartPosition = new Point3D(lastItems.StartPosition.X + 10, lastItems.StartPosition.Y, lastItems.StartPosition.Z),
-                    EndPosition = new Point3D(lastItems.EndPosition.X + 10, lastItems.EndPosition.Y, lastItems.EndPosition.Z)
-                }));
+            Items.Add(new PipeModel3D(
+            new ItemModel(3)
+            {
+                c1 = "3lol",
+                c2 = "3kek",
+                StartPosition = new Point3D(20, 0, 0),
+                EndPosition = new Point3D(20, 30, 0),
+                Type = TubeTypes.curved,
+                Radius = 30
+            }));
+
+            //var lastItems = Items.Last();
+            //Items.Add(new Tube3D(
+            //    new ItemModel(Items.Max(x => x.InnerValue.ID) + 1)
+            //    {
+            //        StartPosition = new Point3D(lastItems.InnerValue.StartPosition.X + 10, lastItems.InnerValue.StartPosition.Y, lastItems.InnerValue.StartPosition.Z),
+            //        EndPosition = new Point3D(lastItems.InnerValue.EndPosition.X + 10, lastItems.InnerValue.EndPosition.Y, lastItems.InnerValue.EndPosition.Z)
+            //    }));
         }
 
         private void RemoveClick(object sender, RoutedEventArgs e)
@@ -313,5 +331,58 @@ namespace WpfAppDatagridGroupingHeader
         //            break;
         //    }
         //}
+        private GeometryModel3D GetModel(double radius, Vector3D normal, Point3D center, int resolution, double StartAngle, double EndAngle)
+        {
+            var mod = new GeometryModel3D();
+            var geo = new MeshGeometry3D();
+
+            // Generate the circle in the XZ-plane
+            // Add the center first
+            geo.Positions.Add(new Point3D(0, 0, 0));
+
+            // Iterate from angle 0 to 2*PI
+            double dev = (2 * Math.PI) / resolution;
+            double thik = 0.02;
+            //float spaceangle = StartAngle + 1;
+            if (StartAngle != EndAngle)
+            {
+                for (double i = StartAngle; i < EndAngle; i += dev)
+                {
+                    geo.Positions.Add(new Point3D(radius * Math.Cos(i), 0, -radius * Math.Sin(i)));
+                    geo.Positions.Add(new Point3D((radius - thik) * Math.Cos(i), 0, (-(radius - thik)) * Math.Sin(i)));
+                }
+
+
+                for (int i = 3; i < geo.Positions.Count; i += 1)
+                {
+                    geo.TriangleIndices.Add(i - 3);
+                    geo.TriangleIndices.Add(i - 1);
+                    geo.TriangleIndices.Add(i - 2);
+
+                    geo.TriangleIndices.Add(i - 1);
+                    geo.TriangleIndices.Add(i);
+                    geo.TriangleIndices.Add(i - 2);
+                }
+            }
+
+
+            mod.Geometry = geo;
+            // Create transforms
+            var trn = new Transform3DGroup();
+            // Up Vector (normal for XZ-plane)
+            var up = new Vector3D(0, 1, 0);
+            // Set normal length to 1
+            normal.Normalize();
+            var axis = Vector3D.CrossProduct(up, normal); // Cross product is rotation axis
+            var angle = Vector3D.AngleBetween(up, normal); // Angle to rotate
+            trn.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(axis, angle)));
+            trn.Children.Add(new TranslateTransform3D(new Vector3D(center.X, center.Y, center.Z)));
+
+            mod.Transform = trn;
+            return mod;
+
+
+        }
+
     }
 }

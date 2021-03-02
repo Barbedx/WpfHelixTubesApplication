@@ -43,6 +43,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -82,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArcVisual3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
     <Compile Include="DataTemplate3D.cs" />
@@ -89,10 +92,15 @@
     <Compile Include="DefaultDataTemplateSelctor3D.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
     <Compile Include="Extensions\FieldInfoExtensions.cs" />
+    <Compile Include="Extensions\PointExtension.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="Helpers\Bezier.cs" />
+    <Compile Include="ItemModel.cs" />
+    <Compile Include="ItemModel3D.cs" />
     <Compile Include="ItemVisual3D.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />
+    <Compile Include="PipeModel3D.cs" />
     <Compile Include="Tube3D.cs" />
     <Compile Include="TubeModel.cs" />
     <Compile Include="UnitsConverter.cs" />
