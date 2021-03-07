@@ -13,8 +13,9 @@
         <converters:BoundsConverter x:Key="BoundsConverter"/>
         <local:DataTemplate3D x:Key="BillboardTemplate">
             <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
+
                 <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetY="{Binding Diametr}"/>
+                   <TranslateTransform3D OffsetY="{Binding Diametr}"/> 
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
@@ -41,12 +42,18 @@
 
     <DockPanel LastChildFill="True">
         <ToolBar DockPanel.Dock="Top">
-            <Button Click="Button_Click_2">Add item</Button>
-            <Button Click="RemoveClick">Remove item</Button>
+            <ToolBarPanel HorizontalAlignment="Left">
+                <Button Content="Zoom extends" Click="Button_Click_3"/>
+            </ToolBarPanel>
+            <Button Click="Button_Click_2">Add tube</Button>
+            <Button Click="Add_Arrow_btn">Add arrow</Button>
+            <Button Click="Add_valve_btn">Add valve</Button> 
             <TextBlock>Items count:</TextBlock>
             <TextBlock Text="{Binding Items.Count}"></TextBlock>
         </ToolBar>
-        <xctk:PropertyGrid DockPanel.Dock="Left"
+        <StackPanel Orientation="Vertical"  DockPanel.Dock="Left">
+            
+        <xctk:PropertyGrid
                            x:Name="_propGrid"
                            SelectedObject="{Binding SelectedObject}"
                             AutoGenerateProperties="False">
@@ -103,14 +110,20 @@
                 <xctk:PropertyDefinition   TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition   TargetProperties="TextPosition"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition   TargetProperties="Caption"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="Spouse"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="IsCurved"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="StartPosition"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="Position2"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="Position3"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="QuadraticCurvedPosition"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="EndPosition"></xctk:PropertyDefinition>
                 <xctk:PropertyDefinition  TargetProperties="InnerValue"></xctk:PropertyDefinition>
+                <xctk:PropertyDefinition  TargetProperties="Cap"></xctk:PropertyDefinition> 
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <TextBlock Text="Angle"></TextBlock>
+            <xctk:DecimalUpDown x:Name="txt_updown" ValueChanged="updown_ValueChanged"></xctk:DecimalUpDown>
+        </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -143,7 +156,7 @@
                     <!--<h:TubeVisual3D Path="0 0 0  0 10 0  10 10 0 "/>-->
                 </ModelVisual3D>
                 
-                <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"  RefreshChildrenOnChange="True" />
+                <!--<local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />-->
                 <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
                 
                 <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>

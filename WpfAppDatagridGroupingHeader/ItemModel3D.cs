@@ -12,6 +12,7 @@ namespace WpfAppDatagridGroupingHeader
         public ItemModel3D(T innerValue)
         {
             InnerValue = innerValue;
+            GeometryModel3D.Material = MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
             AppearanceChanged();
         }
@@ -27,9 +28,21 @@ namespace WpfAppDatagridGroupingHeader
 
         //Using a DependencyProperty as the backing store for Caption.This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CaptionProperty =
-        DependencyPropertyEx.Register<string, Tube3D>(nameof(Caption), "noname", (s, e) => s.AppearanceChanged());
+        DependencyPropertyEx.Register<string, ItemModel3D<T>>(nameof(Caption), "noname", (s, e) => s.AppearanceChanged());
 
         protected abstract void AppearanceChanged();
+
+
+        public int ThetaDiv
+        {
+            get { return (int)GetValue(ThetaDivProperty); }
+            set { SetValue(ThetaDivProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ThetaDiv.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ThetaDivProperty =
+            DependencyPropertyEx.Register<int, PipeModel3D>(nameof(ThetaDiv), 19, (s, e) => s.AppearanceChanged());
+
 
     }
 }

@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArcVisual3D.cs" />
+    <Compile Include="ArrowModel3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
     <Compile Include="DataTemplate3D.cs" />
@@ -101,9 +102,9 @@
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />
     <Compile Include="PipeModel3D.cs" />
-    <Compile Include="Tube3D.cs" />
     <Compile Include="TubeModel.cs" />
     <Compile Include="UnitsConverter.cs" />
+    <Compile Include="ValveModel3D.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

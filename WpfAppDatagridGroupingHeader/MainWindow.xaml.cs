@@ -99,12 +99,8 @@ namespace WpfAppDatagridGroupingHeader
                     Radius =30
                 }
             };
-            var allItmes = new List<ItemModel3D<ItemModel>>(res.Where(x => x.Type == TubeTypes.Regular).Select(x => new Tube3D(x)));
-            allItmes.AddRange(res.Where(x => x.Type == TubeTypes.Regular).Select(x => new PipeModel3D(x)));
-            //allItmes.Add()
-            //allItmes.AddRange()
-            //Items = new ObservableCollection<Tube3D>();
-            //Items.Add()
+            var allItmes = new List<ItemModel3D<ItemModel>> (res.Where(x => x.Type == TubeTypes.Regular).Select(x => new PipeModel3D(x)));
+            
             Items = new ObservableCollection<ItemModel3D<ItemModel>>(allItmes);
             this.DataContext = this;
              
@@ -249,7 +245,7 @@ namespace WpfAppDatagridGroupingHeader
                 if (firstHit.Visual is BillboardTextVisual3D bmodel)
                 {
 
-
+                    this.Select(bmodel);
                     //var gModel = bmodel.geometryModel;
                     //gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
                     //e.Handled = true;
@@ -330,59 +326,45 @@ namespace WpfAppDatagridGroupingHeader
         //        default:
         //            break;
         //    }
-        //}
-        private GeometryModel3D GetModel(double radius, Vector3D normal, Point3D center, int resolution, double StartAngle, double EndAngle)
+        //} 
+        private void Add_valve_btn(object sender, RoutedEventArgs e)
         {
-            var mod = new GeometryModel3D();
-            var geo = new MeshGeometry3D();
 
-            // Generate the circle in the XZ-plane
-            // Add the center first
-            geo.Positions.Add(new Point3D(0, 0, 0));
+            Items.Add(new ValveModel3D(
+               new ItemModel(4)
+               {
+                   c1 = "3lol",
+                   c2 = "3kek",
+                   StartPosition = new Point3D(20, 0, 0),
+                   EndPosition = new Point3D(20, 30, 0)
+               }));
+        }
 
-            // Iterate from angle 0 to 2*PI
-            double dev = (2 * Math.PI) / resolution;
-            double thik = 0.02;
-            //float spaceangle = StartAngle + 1;
-            if (StartAngle != EndAngle)
-            {
-                for (double i = StartAngle; i < EndAngle; i += dev)
-                {
-                    geo.Positions.Add(new Point3D(radius * Math.Cos(i), 0, -radius * Math.Sin(i)));
-                    geo.Positions.Add(new Point3D((radius - thik) * Math.Cos(i), 0, (-(radius - thik)) * Math.Sin(i)));
-                }
+        private void Add_Arrow_btn(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new ArrowModel3D(
+               new ItemModel(4)
+               {
+                   c1 = "3lol",
+                   c2 = "3kek",
+                   StartPosition = new Point3D(20, 0, 0),
+                   EndPosition = new Point3D(20, 30, 0)
+               }));
+        }
 
-
-                for (int i = 3; i < geo.Positions.Count; i += 1)
-                {
-                    geo.TriangleIndices.Add(i - 3);
-                    geo.TriangleIndices.Add(i - 1);
-                    geo.TriangleIndices.Add(i - 2);
-
-                    geo.TriangleIndices.Add(i - 1);
-                    geo.TriangleIndices.Add(i);
-                    geo.TriangleIndices.Add(i - 2);
-                }
-            }
-
-
-            mod.Geometry = geo;
-            // Create transforms
-            var trn = new Transform3DGroup();
-            // Up Vector (normal for XZ-plane)
-            var up = new Vector3D(0, 1, 0);
-            // Set normal length to 1
-            normal.Normalize();
-            var axis = Vector3D.CrossProduct(up, normal); // Cross product is rotation axis
-            var angle = Vector3D.AngleBetween(up, normal); // Angle to rotate
-            trn.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(axis, angle)));
-            trn.Children.Add(new TranslateTransform3D(new Vector3D(center.X, center.Y, center.Z)));
-
-            mod.Transform = trn;
-            return mod;
-
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            viewport.ZoomExtents(500);
 
         }
 
+        private void updown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (selectedObject is PipeModel3D pipe)
+            {
+
+                 pipe.Rotate(decimal.ToDouble(txt_updown.Value.Value));// = new RotateTransform3D(new AxisAngleRotation3D())
+            }
+        }
     }
 }

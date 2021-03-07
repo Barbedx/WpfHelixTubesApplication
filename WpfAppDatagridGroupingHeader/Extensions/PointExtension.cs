@@ -10,12 +10,16 @@ namespace WpfAppDatagridGroupingHeader.Extensions
 {
 public    static  class PointExtension
     {
-       public static Vector3 ToVector3(this Point3D point3D)
+        public static Vector3 ToVector3(this Point3D point3D)
         {
             var x = (float)point3D.X;
             var y = (float)point3D.Y;
             var z = (float)point3D.Z;
             return new Vector3(x, y, z);
+        }
+        public static Vector3D ToVector3D(this Vector3 v)
+        { 
+            return new Vector3D(v.X, v.Y, v.Z);
         }
     }
 }
