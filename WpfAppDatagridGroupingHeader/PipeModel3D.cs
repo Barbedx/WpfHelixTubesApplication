@@ -11,15 +11,19 @@ using WpfAppDatagridGroupingHeader.Extensions;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    internal class PipeModel3D : ItemModel3D<ItemModel>
+    public enum TubeStabs
     {
-        public PipeModel3D(ItemModel innerValue) : base(innerValue)
-        {
-        }
+        None,
+        FrontCap,
+        BackCap,
+        All
+    }
 
+    internal class PipeModel3D : ItemModel3D
+    {
         #region DP Properties
-        public static readonly DependencyProperty StartPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(StartPosition), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged());
-        public static readonly DependencyProperty EndPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(EndPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged());
+        public static readonly DependencyProperty StartPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(StartPosition), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged(e));
+        public static readonly DependencyProperty EndPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(EndPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged(e));
 
 
         public double Diametr
@@ -30,19 +34,11 @@ namespace WpfAppDatagridGroupingHeader
 
         // Using a DependencyProperty as the backing store for Diametr.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DiametrProperty =
-            DependencyPropertyEx.Register<double, PipeModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged());
+            DependencyPropertyEx.Register<double, PipeModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged(e));
 
 
 
-        public bool IsCurved
-        {
-            get { return (bool)GetValue(IsCurvedProperty); }
-            set { SetValue(IsCurvedProperty, value); }
-        }
 
-        // Using a DependencyProperty as the backing store for IsCurved.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsCurvedProperty =
-            DependencyPropertyEx.Register<bool, PipeModel3D>(nameof(IsCurved), false, (s, e) => s.AppearanceChanged());
 
         public Point3D StartPosition
         {
@@ -56,65 +52,38 @@ namespace WpfAppDatagridGroupingHeader
         }
 
 
-        public Point3D QuadraticCurvedPosition
+
+        public TubeStabs TubeStabs
         {
-            get { return (Point3D)GetValue(QuadraticCurvedPositionProperty); }
-            set { SetValue(QuadraticCurvedPositionProperty, value); }
+            get { return (TubeStabs)GetValue(TubeStabsProperty); }
+            set { SetValue(TubeStabsProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Position2.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty QuadraticCurvedPositionProperty =
-            DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(QuadraticCurvedPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged());
+        // Using a DependencyProperty as the backing store for TubeStabs.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TubeStabsProperty =
+         DependencyPropertyEx.Register<TubeStabs, PipeModel3D>(nameof(TubeStabs), new TubeStabs(), (s, e) => s.AppearanceChanged(e));
 
-        public float Length
-        {
-            get { return (float)GetValue(LengthProperty); }
-            set { SetValue(LengthProperty, value); }
-        }
 
-        // Using a DependencyProperty as the backing store for Length.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LengthProperty =
-        DependencyPropertyEx.Register<float, PipeModel3D>(nameof(Length), 0, (s, e) => s.AppearanceChanged());
-         
-
-         
 
         #endregion
 
-        private Bezier Bezier { get; set; }
-        protected override void AppearanceChanged()
+        protected override void AppearanceChanged(DependencyPropertyChangedEventArgs e)
         {
             var gb = new MeshBuilder();
-            Point3D[] pts;
-            if (IsCurved)
-            {
 
-                Bezier = new Bezier(StartPosition, QuadraticCurvedPosition, QuadraticCurvedPosition, EndPosition, 100);
-                pts = Bezier.points.Select(x => new Point3D(x.X, x.Y, x.Z)).ToArray(); 
-            }
-            else
-            {
-                pts = new Point3D[] { StartPosition, EndPosition };
-            }
-            gb.AddTube(path: pts,
+            gb.AddTube(path: new Point3D[] { StartPosition, EndPosition },
                    diameter: this.Diametr,
                    thetaDiv: ThetaDiv,
-                   isTubeClosed: false
+                   isTubeClosed: false,
+                   TubeStabs == TubeStabs.FrontCap|| TubeStabs == TubeStabs.All,
+                   TubeStabs == TubeStabs.BackCap|| TubeStabs == TubeStabs.All
                    );
 
-            GeometryModel3D.Material = MaterialHelper.CreateMaterial(Brushes.Red);
-            GeometryModel3D.BackMaterial = MaterialHelper.CreateMaterial(Brushes.Yellow);
+            GeometryModel3D.Material = this.Material;// MaterialHelper.CreateMaterial(Brushes.Red);
+            GeometryModel3D.BackMaterial = this.BackMaterial;
             GeometryModel3D.Geometry = gb.ToMesh();
-
-
         }
 
-        internal void Rotate(double angle)
-        {
-            var vector = this.Bezier.points[1] - this.Bezier.points[0];
-            var rotation = new AxisAngleRotation3D(vector.ToVector3D(), angle);
-            this.Transform = new RotateTransform3D(rotation);
-            var newEndPosition = this.Transform.Transform(EndPosition); 
-        }
+
     }
 }

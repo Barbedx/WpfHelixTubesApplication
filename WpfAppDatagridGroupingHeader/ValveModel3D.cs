@@ -6,7 +6,7 @@ using HelixToolkit.Wpf;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    internal class ValveModel3D : ItemModel3D<ItemModel>
+    internal class ValveModel3D : ItemModel3D
     {
         public double Diametr
         {
@@ -16,14 +16,14 @@ namespace WpfAppDatagridGroupingHeader
 
         // Using a DependencyProperty as the backing store for Diametr.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DiametrProperty =
-            DependencyPropertyEx.Register<double, ValveModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged());
+            DependencyPropertyEx.Register<double, ValveModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged(e));
 
 
 
-        public static readonly DependencyProperty StartPositionProperty = DependencyPropertyEx.Register<Point3D, ValveModel3D>(nameof(StartPosition), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged());
-        public static readonly DependencyProperty EndPositionProperty = DependencyPropertyEx.Register<Point3D, ValveModel3D>(nameof(EndPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged());
+        public static readonly DependencyProperty StartPositionProperty = DependencyPropertyEx.Register<Point3D, ValveModel3D>(nameof(StartPosition), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged(e));
+        public static readonly DependencyProperty EndPositionProperty = DependencyPropertyEx.Register<Point3D, ValveModel3D>(nameof(EndPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged(e));
 
-        public ValveModel3D(ItemModel innerValue) : base(innerValue)
+        public ValveModel3D(ItemModel innerValue)
         {
         }
 
@@ -48,10 +48,10 @@ namespace WpfAppDatagridGroupingHeader
 
         // Using a DependencyProperty as the backing store for Cap.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CapProperty = 
-        DependencyPropertyEx.Register<bool, ValveModel3D>(nameof(Cap), false, (s, e) => s.AppearanceChanged());
+        DependencyPropertyEx.Register<bool, ValveModel3D>(nameof(Cap), false, (s, e) => s.AppearanceChanged(e));
 
 
-        protected override void AppearanceChanged()
+        protected override void AppearanceChanged(DependencyPropertyChangedEventArgs e)
         {
             var mb = new MeshBuilder();
             var centerX = (StartPosition.X  + EndPosition.X) / 2;

@@ -15,7 +15,7 @@
             <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
 
                 <ModelVisual3D.Transform>
-                   <TranslateTransform3D OffsetY="{Binding Diametr}"/> 
+                    <TranslateTransform3D OffsetY="{Binding Diametr}"/>
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
@@ -31,9 +31,11 @@
             <ModelVisual3D>
                 
             <local:Tube3D StartPosition="{Binding StartPosition}" EndPosition="{Binding EndPosition}" >
-                --><!--local:Tube3D.Transform>
+                -->
+        <!--local:Tube3D.Transform>
                         <TranslateTransform3D OffsetX="{Binding Position.X}" OffsetY="{Binding Position.Y}" OffsetZ="{Binding Position.Z}" />
-                    </local:Tube3D.Transform>--><!--
+                    </local:Tube3D.Transform>-->
+        <!--
                 </local:Tube3D>
                 <h:BillboardTextVisual3D Text="wtf" Position="{Binding StartPosition}"/>
             </ModelVisual3D>
@@ -47,79 +49,50 @@
             </ToolBarPanel>
             <Button Click="Button_Click_2">Add tube</Button>
             <Button Click="Add_Arrow_btn">Add arrow</Button>
-            <Button Click="Add_valve_btn">Add valve</Button> 
+            <Button Click="Add_valve_btn">Add valve</Button>
+            <Button Click="Add_arrows_btn">Add Three arrows</Button>
+            <Button Click="Add_Curved_pipe">Add curved pipe</Button>
+            <Button Click="Add_squere_stub">Add squeare stub</Button>
+            <Button Click="Add_tee_pipe">Add tee Pipe</Button>
             <TextBlock>Items count:</TextBlock>
             <TextBlock Text="{Binding Items.Count}"></TextBlock>
         </ToolBar>
-        <StackPanel Orientation="Vertical"  DockPanel.Dock="Left">
-            
-        <xctk:PropertyGrid
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical"  DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left">
+                
+            <xctk:PropertyGrid VerticalAlignment="Stretch"  
                            x:Name="_propGrid"
                            SelectedObject="{Binding SelectedObject}"
-                            AutoGenerateProperties="False">
-            <xctk:PropertyGrid.EditorDefinitions>
-                <xctk:EditorTemplateDefinition TargetProperties="c4">
-                    <xctk:EditorTemplateDefinition.EditingTemplate>
-                        <DataTemplate>
-                            <TextBlock Background="Yellow" Text="{Binding Value, Converter={StaticResource UnitConverter}, ConverterParameter=1000}" />
-                        </DataTemplate>
-                    </xctk:EditorTemplateDefinition.EditingTemplate>
-                </xctk:EditorTemplateDefinition>
-                <xctk:EditorTemplateDefinition TargetProperties="c5">
-                    <xctk:EditorTemplateDefinition.EditingTemplate>
-                        <DataTemplate >
-                            <StackPanel Orientation="Horizontal">
-                                <ListBox ItemsSource="{Binding Value}"/>
-                                <Button Tag="{Binding Value}"  Click="Button_Click_1" Content="..." />
-                            </StackPanel>
-                        </DataTemplate>
-                    </xctk:EditorTemplateDefinition.EditingTemplate>
-                </xctk:EditorTemplateDefinition>
+                            AutoGenerateProperties="True">
+               
+                <!--<xctk:PropertyGrid.PropertyDefinitions>
+                    <xctk:PropertyDefinition  TargetProperties="c1"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="c2"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="c3"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="c5"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition   TargetProperties="InnerDiametr"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition   TargetProperties="Diametr"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition   TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition   TargetProperties="TextPosition"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition   TargetProperties="Caption"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="IsCurved"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="StartPosition"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="QuadraticCurvedPosition"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="EndPosition"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="InnerValue"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="Cap"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="VectorOfCenter"></xctk:PropertyDefinition>
+                    <xctk:PropertyDefinition  TargetProperties="VectorOfCenter"  />
+                    <xctk:PropertyDefinition  TargetProperties="Position"        />
+                    <xctk:PropertyDefinition  TargetProperties="Height"          />
+                    <xctk:PropertyDefinition  TargetProperties="Diametr"         />
+                    <xctk:PropertyDefinition  TargetProperties="Offset"          />
 
-                <!--<xctk:EditorDefinition>
-                    <xctk:EditorDefinition.PropertiesDefinitions>
-                        <xctk:PropertyDefinition Name="c4" />
-                    </xctk:EditorDefinition.PropertiesDefinitions>
-                    <xctk:EditorDefinition.EditorTemplate>
-                        <DataTemplate>
-                            <TextBlock Background="Yellow"  Text="{Binding Value}" />
-                        </DataTemplate>
-                    </xctk:EditorDefinition.EditorTemplate>
-                </xctk:EditorDefinition> 
-            </xctk:PropertyGrid.EditorDefinitions>-->
-                <!--<xctk:EditorDefinition TargetType="{x:Type sys:double}">
-                <xctk:EditorDefinition.PropertiesDefinitions>
-                    <xctk:PropertyDefinition Name="DateOfBirth" />
-                    <xctk:PropertyDefinition Name="LastName" />
-                </xctk:EditorDefinition.PropertiesDefinitions>
-                <xctk:EditorDefinition.EditorTemplate>
-                    <DataTemplate>
-                        <TextBox Background="Red"  Text="{Binding Value}" />
-                    </DataTemplate>
-                </xctk:EditorDefinition.EditorTemplate>
-            </xctk:EditorDefinition>-->
-
-            </xctk:PropertyGrid.EditorDefinitions>
-            <xctk:PropertyGrid.PropertyDefinitions>
-                <xctk:PropertyDefinition  TargetProperties="c1"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="c2"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="c3"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="c5"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition   TargetProperties="InnerDiametr"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition   TargetProperties="Diametr"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition   TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition   TargetProperties="TextPosition"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition   TargetProperties="Caption"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="IsCurved"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="StartPosition"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="QuadraticCurvedPosition"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="EndPosition"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="InnerValue"></xctk:PropertyDefinition>
-                <xctk:PropertyDefinition  TargetProperties="Cap"></xctk:PropertyDefinition> 
-            </xctk:PropertyGrid.PropertyDefinitions>
-        </xctk:PropertyGrid>
+                </xctk:PropertyGrid.PropertyDefinitions>-->
+            </xctk:PropertyGrid>
         </StackPanel>
+            </ScrollViewer>
         <StackPanel DockPanel.Dock="Left">
             <TextBlock Text="Angle"></TextBlock>
             <xctk:DecimalUpDown x:Name="txt_updown" ValueChanged="updown_ValueChanged"></xctk:DecimalUpDown>
@@ -151,14 +124,14 @@
                 <ModelVisual3D>
                     <!--<h:TubeVisual3D Path="0 0 0  5 0 0  5 5 0 " />
                     <h:HelixVisual3D Origin="10 0 0"  Radius="5" Length="0"  Turns="0.25" />-->
-                    
+
 
                     <!--<h:TubeVisual3D Path="0 0 0  0 10 0  10 10 0 "/>-->
                 </ModelVisual3D>
-                
+
                 <!--<local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />-->
                 <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
-                
+
                 <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
             </h:HelixViewport3D>
 
@@ -186,8 +159,8 @@
                 </Grid>
                 <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedObject}" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0"  >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding=  "{Binding InnerValue.c1}" Header="column 1" Width="200" x:Name="Column1" />
-                        <DataGridTextColumn Binding = "{Binding InnerValue.c2}" Header="column 2" Width="80" x:Name="Column2"/>
+                        <DataGridTextColumn Binding=  "{Binding StartPosition}" Header="column 1" Width="200" x:Name="Column1" />
+                        <DataGridTextColumn Binding = "{Binding EndPosition}" Header="column 2" Width="80" x:Name="Column2"/>
                         <DataGridTextColumn Binding = "{Binding InnerValue.StartPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}" Header="column 3" Width="80" x:Name="Column3"/>
                         <DataGridTextColumn Binding = "{Binding InnerValue.EndPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"  Header="column 4" Width="*" x:Name="Column4"  />
                     </DataGrid.Columns>

@@ -38,7 +38,10 @@ namespace WpfAppDatagridGroupingHeader.Helpers
         public Bezier(Point3D v0, Point3D v1, Point3D v2, Point3D v3, int _calculatePoints = 0) :
             this(v0.ToVector3(), v1.ToVector3(), v2.ToVector3(), v3.ToVector3(), _calculatePoints)
         { }
- 
+        public Bezier(Point3D v0, Point3D v1, Point3D v3, int _calculatePoints = 0) :
+             this(v0.ToVector3(), v1.ToVector3(), v1.ToVector3(), v3.ToVector3(), _calculatePoints)
+        { }
+
 
         // 0.0 >= t <= 1.0 her be magic and dragons
         public Vector3 GetPointAtTime(float t)

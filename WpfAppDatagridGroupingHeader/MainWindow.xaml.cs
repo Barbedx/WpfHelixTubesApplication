@@ -50,7 +50,7 @@ namespace WpfAppDatagridGroupingHeader
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<ItemModel3D<ItemModel>> Items { get; set; }
+        public ObservableCollection<ItemModel3D> Items { get; set; }
         //public ObservableCollection<TubeModel> Items { get; set; }
         public MainWindow()
         {
@@ -99,12 +99,12 @@ namespace WpfAppDatagridGroupingHeader
                     Radius =30
                 }
             };
-            var allItmes = new List<ItemModel3D<ItemModel>> (res.Where(x => x.Type == TubeTypes.Regular).Select(x => new PipeModel3D(x)));
-            
-            Items = new ObservableCollection<ItemModel3D<ItemModel>>(allItmes);
+            var allItmes = new List<ItemModel3D>(res.Where(x => x.Type == TubeTypes.Regular).Select(x => new PipeModel3D()));
+
+            Items = new ObservableCollection<ItemModel3D>(allItmes);
             this.DataContext = this;
-             
-             
+
+
 
             //for (int i = 0; i < 100; i++)
             //{
@@ -136,67 +136,6 @@ namespace WpfAppDatagridGroupingHeader
             }
         }
 
-        // private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        // {
-        //     if (e.AddedItems.Count > 0)
-        //     {
-        //         _propGrid.SelectedObject = e.AddedItems[0];
-        //
-        //     }
-        // }
-
-
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-            using (var document = DocX.Create("docname.docx"))
-            {
-                var temlplate = "DocumentWithTemplateTable.docx";
-                document.ApplyTemplate(temlplate);
-
-                document.ReplaceText("<$My grocery list$>", "wtf");
-
-                var dt = document.Tables.FirstOrDefault(x => x.TableCaption == "GROCERY_LIST");
-                var pattern = dt.Rows[1];
-                for (int i = 0; i < 20; i++)
-                {
-                    var newrow = dt.InsertRow(pattern, dt.RowCount - 1);
-                    newrow.ReplaceText("%PRODUCT_NAME%", i.ToString());
-                }
-
-
-                var pt = document.Tables.FirstOrDefault(x => x.TableCaption == "table with columns");
-                //var temlplateColumnNumber = 2; //номер колонки где переменные 
-                var temlplateColumnNumber = pt.ColumnCount - 1; //впринципе так как она последняя в таблице - мжно брать последнюю. 
-                foreach (var item in Items) // my list - наш список из которого будем генерировать столбцы
-                {
-                    pt.InsertColumn();
-                    foreach (var row in pt.Rows)//обрабатываем построчно
-                    {
-                        var templateCellValue = row.Cells[temlplateColumnNumber].Xml.Value; //копируем значение из темплейт  
-                        var newCell = row.Cells[row.Cells.Count - 1];                       //столбца в  новый
-                        newCell.Paragraphs.First().Append(templateCellValue);               //для удобства дальнейшей обработки
-
-
-                        newCell.ReplaceText(templateCellValue, GetValueByTemplate(templateCellValue, item.InnerValue)); // заменяем текст в новом столбце
-
-                    }
-                }
-                //pt.RemoveColumn(temlplateColumnNumber);
-                //var tamplaterow = pt.Rows.FirstOrDefault();
-                //tamplaterow.
-                //pt.
-
-
-                //                Name
-                //    price       First<first>
-
-                //    last<last>
-                //count<price>
-                document.Save();
-            }
-        }
 
         private string GetValueByTemplate(string templateCellValue, ItemModel item)
         {
@@ -235,7 +174,7 @@ namespace WpfAppDatagridGroupingHeader
             var firstHit = viewport.Viewport.FindHits(e.GetPosition(viewport)).FirstOrDefault();
             if (firstHit != null)
             {
-                if (firstHit.Visual is ItemModel3D<ItemModel>  model)
+                if (firstHit.Visual is ItemModel3D model)
                 {
                     var gModel = model.GeometryModel3D;
                     gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
@@ -294,16 +233,16 @@ namespace WpfAppDatagridGroupingHeader
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Items.Add(new PipeModel3D(
-            new ItemModel(3)
-            {
-                c1 = "3lol",
-                c2 = "3kek",
-                StartPosition = new Point3D(20, 0, 0),
-                EndPosition = new Point3D(20, 30, 0),
-                Type = TubeTypes.curved,
-                Radius = 30
-            }));
+            Items.Add(new PipeModel3D());
+            //new ItemModel(3)
+            //{
+            //    c1 = "3lol",
+            //    c2 = "3kek",
+            //    StartPosition = new Point3D(20, 0, 0),
+            //    EndPosition = new Point3D(20, 30, 0),
+            //    Type = TubeTypes.curved,
+            //    Radius = 30
+            //}));
 
             //var lastItems = Items.Last();
             //Items.Add(new Tube3D(
@@ -342,14 +281,9 @@ namespace WpfAppDatagridGroupingHeader
 
         private void Add_Arrow_btn(object sender, RoutedEventArgs e)
         {
-            Items.Add(new ArrowModel3D(
-               new ItemModel(4)
-               {
-                   c1 = "3lol",
-                   c2 = "3kek",
-                   StartPosition = new Point3D(20, 0, 0),
-                   EndPosition = new Point3D(20, 30, 0)
-               }));
+            Items.Add(new ArrowModel3D(new Point3D(20, 0, 0), 5));
+            Items.Add(new ArrowModel3D(new Point3D(0, 0, 0), 5));
+
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -360,11 +294,34 @@ namespace WpfAppDatagridGroupingHeader
 
         private void updown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (selectedObject is PipeModel3D pipe)
+            if (selectedObject is CurvedPipeModel3D pipe)
             {
 
-                 pipe.Rotate(decimal.ToDouble(txt_updown.Value.Value));// = new RotateTransform3D(new AxisAngleRotation3D())
+                pipe.Rotate(decimal.ToDouble(txt_updown.Value.Value));// = new RotateTransform3D(new AxisAngleRotation3D())
             }
         }
+
+        private void Add_arrows_btn(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new ThreeArrowModel3D(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), 5));
+        }
+
+        private void Add_Curved_pipe(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new CurvedPipeModel3D(startPosition: new Point3D(0, 0, 0), startDirection: new Vector3D(0, 1,0 ), endDirection: new Vector3D(1, 0, 0), length: 5));
+
+        }
+
+        private void Add_squere_stub(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new CircleStubModel3D());
+
+        }
+        private void Add_tee_pipe(object sender, RoutedEventArgs e)
+        {
+            Items.Add(new TeePipeModel3D());
+        }
+
+
     }
 }

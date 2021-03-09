@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GeometRi, Version=1.3.5.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GeometRi.1.3.5.15\lib\net20\GeometRi.dll</HintPath>
+    </Reference>
     <Reference Include="HelixToolkit, Version=2.15.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
       <HintPath>..\packages\HelixToolkit.2.15.0\lib\netstandard1.1\HelixToolkit.dll</HintPath>
     </Reference>
@@ -88,6 +91,7 @@
     <Compile Include="ArrowModel3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
+    <Compile Include="CurvedPipeModel3D.cs" />
     <Compile Include="DataTemplate3D.cs" />
     <Compile Include="DataTemplateSelector3D.cs" />
     <Compile Include="DefaultDataTemplateSelctor3D.cs" />
@@ -102,7 +106,8 @@
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />
     <Compile Include="PipeModel3D.cs" />
-    <Compile Include="TubeModel.cs" />
+    <Compile Include="CircleStubModel3D.cs" />
+    <Compile Include="ThreeArrowModel3D.cs" />
     <Compile Include="UnitsConverter.cs" />
     <Compile Include="ValveModel3D.cs" />
     <Page Include="MainWindow.xaml">
