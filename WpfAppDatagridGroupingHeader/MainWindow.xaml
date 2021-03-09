@@ -42,7 +42,7 @@
         </local:DataTemplate3D>-->
     </Window.Resources>
 
-    <DockPanel LastChildFill="True">
+    <DockPanel Background="blue" LastChildFill="True">
         <ToolBar DockPanel.Dock="Top">
             <ToolBarPanel HorizontalAlignment="Left">
                 <Button Content="Zoom extends" Click="Button_Click_3"/>
@@ -65,31 +65,6 @@
                            SelectedObject="{Binding SelectedObject}"
                             AutoGenerateProperties="True">
                
-                <!--<xctk:PropertyGrid.PropertyDefinitions>
-                    <xctk:PropertyDefinition  TargetProperties="c1"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="c2"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="c3"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="c5"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition   TargetProperties="InnerDiametr"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition   TargetProperties="Diametr"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition   TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition   TargetProperties="TextPosition"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition   TargetProperties="Caption"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="IsCurved"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="StartPosition"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="QuadraticCurvedPosition"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="ThetaDiv"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="EndPosition"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="InnerValue"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="Cap"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="VectorOfCenter"></xctk:PropertyDefinition>
-                    <xctk:PropertyDefinition  TargetProperties="VectorOfCenter"  />
-                    <xctk:PropertyDefinition  TargetProperties="Position"        />
-                    <xctk:PropertyDefinition  TargetProperties="Height"          />
-                    <xctk:PropertyDefinition  TargetProperties="Diametr"         />
-                    <xctk:PropertyDefinition  TargetProperties="Offset"          />
-
-                </xctk:PropertyGrid.PropertyDefinitions>-->
             </xctk:PropertyGrid>
         </StackPanel>
             </ScrollViewer>
@@ -136,7 +111,7 @@
             </h:HelixViewport3D>
 
             <GridSplitter Grid.Row = "1" ResizeDirection="Rows" Height="4" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
-            <Grid  Grid.Row="3">
+            <Grid  Grid.Row="3" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="2*"/>

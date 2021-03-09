@@ -37,6 +37,10 @@ public    static  class PointExtension
         {
             return new Vector3D(v.X, v.Y, v.Z);
         }
+        public static Vector3D GetNormalized(this Vector3D v)
+        {
+            return   new Vector3D(v.X / v.Length, v.Y / v.Length, v.Z / v.Length);
+        }
         public static geo.Vector3d ToGeometRIVector3D(this Vector3D v)
         {
             return new geo.Vector3d(v.X, v.Y, v.Z);

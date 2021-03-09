@@ -87,7 +87,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArcVisual3D.cs" />
     <Compile Include="ArrowModel3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
@@ -102,11 +101,13 @@
     <Compile Include="Helpers\Bezier.cs" />
     <Compile Include="ItemModel.cs" />
     <Compile Include="ItemModel3D.cs" />
+    <Compile Include="ItemModel3DFactory.cs" />
     <Compile Include="ItemVisual3D.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />
     <Compile Include="PipeModel3D.cs" />
     <Compile Include="CircleStubModel3D.cs" />
+    <Compile Include="TeePipeModel3D.cs" />
     <Compile Include="ThreeArrowModel3D.cs" />
     <Compile Include="UnitsConverter.cs" />
     <Compile Include="ValveModel3D.cs" />

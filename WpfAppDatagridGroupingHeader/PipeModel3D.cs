@@ -21,66 +21,91 @@ namespace WpfAppDatagridGroupingHeader
 
     internal class PipeModel3D : ItemModel3D
     {
-        #region DP Properties
-        public static readonly DependencyProperty StartPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(StartPosition), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged(e));
-        public static readonly DependencyProperty EndPositionProperty = DependencyPropertyEx.Register<Point3D, PipeModel3D>(nameof(EndPosition), new Point3D(10, 0, 0), (s, e) => s.AppearanceChanged(e));
 
-
-        public double Diametr
-        {
-            get { return (double)GetValue(DiametrProperty); }
-            set { SetValue(DiametrProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Diametr.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DiametrProperty =
-            DependencyPropertyEx.Register<double, PipeModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged(e));
-
-
-
-
+        #region properties
+        private Point3D startPosition ;
 
         public Point3D StartPosition
         {
-            get { return (Point3D)this.GetValue(StartPositionProperty); }
-            set { this.SetValue(StartPositionProperty, value); }
+            get { return startPosition; }
+            set
+            {
+                if (startPosition != value)
+                {
+                    startPosition = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
+
+        private Point3D endPosition  ;
+
         public Point3D EndPosition
         {
-            get { return (Point3D)this.GetValue(EndPositionProperty); }
-            set { this.SetValue(EndPositionProperty, value); }
+            get { return endPosition; }
+            set
+            {
+                if (endPosition != value)
+                {
+                    endPosition = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
 
+        private double diameter;
 
+        public double Diameter
+        {
+            get { return diameter; }
+            set
+            {
+                if (diameter != value)
+                {
+                    diameter = value;
+                    this.AppearanceChanged();
+                };
+            }
+        }
+
+        private TubeStabs tubeStabs = TubeStabs.None;
+
+        public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None):base()
+        {
+            this.startPosition = startPosition;
+            this.endPosition = endPosition;
+            this.diameter = diameter;
+            this.tubeStabs = tubeStabs;
+        }
 
         public TubeStabs TubeStabs
         {
-            get { return (TubeStabs)GetValue(TubeStabsProperty); }
-            set { SetValue(TubeStabsProperty, value); }
+            get { return tubeStabs; }
+            set
+            {
+                if (tubeStabs != value)
+                {
+                    tubeStabs = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
-
-        // Using a DependencyProperty as the backing store for TubeStabs.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TubeStabsProperty =
-         DependencyPropertyEx.Register<TubeStabs, PipeModel3D>(nameof(TubeStabs), new TubeStabs(), (s, e) => s.AppearanceChanged(e));
-
-
-
+         
         #endregion
 
-        protected override void AppearanceChanged(DependencyPropertyChangedEventArgs e)
+        protected override void AppearanceChanged(string caller = null)
         {
             var gb = new MeshBuilder();
 
             gb.AddTube(path: new Point3D[] { StartPosition, EndPosition },
-                   diameter: this.Diametr,
+                   diameter: this.Diameter,
                    thetaDiv: ThetaDiv,
                    isTubeClosed: false,
                    TubeStabs == TubeStabs.FrontCap|| TubeStabs == TubeStabs.All,
                    TubeStabs == TubeStabs.BackCap|| TubeStabs == TubeStabs.All
                    );
-
-            GeometryModel3D.Material = this.Material;// MaterialHelper.CreateMaterial(Brushes.Red);
-            GeometryModel3D.BackMaterial = this.BackMaterial;
+            //GeometryModel3D.Material = this.Material;// MaterialHelper.CreateMaterial(Brushes.Red);
+            //GeometryModel3D.BackMaterial = this.BackMaterial;
             GeometryModel3D.Geometry = gb.ToMesh();
         }
 

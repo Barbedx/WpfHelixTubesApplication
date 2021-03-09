@@ -8,79 +8,93 @@ namespace WpfAppDatagridGroupingHeader
 {
     internal class ArrowModel3D : ItemModel3D
     {
+ 
+        private double diameter = 10;
 
-        public double Diametr
+        protected double Diameter
         {
-            get { return (double)GetValue(DiametrProperty); }
-            set { SetValue(DiametrProperty, value); }
+            get => diameter;
+            set
+            {
+                if (diameter != value)
+                {
+                    diameter = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
 
-        // Using a DependencyProperty as the backing store for Diametr.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DiametrProperty =
-            DependencyPropertyEx.Register<double, ArrowModel3D>(nameof(Diametr), 10, (s, e) => s.AppearanceChanged(e));
 
 
+        //public static readonly DependencyProperty PositionProperty = DependencyPropertyEx.Register<Point3D, ArrowModel3D>(nameof(Position), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged(e)); 
 
-        public static readonly DependencyProperty PositionProperty = DependencyPropertyEx.Register<Point3D, ArrowModel3D>(nameof(Position), new Point3D(0, 0, 0), (s, e) => s.AppearanceChanged(e)); 
-
+        private Point3D position;
 
         public Point3D Position
         {
-            get { return (Point3D)this.GetValue(PositionProperty); }
-            set { this.SetValue(PositionProperty, value); }
+            get { return position; }
+            set
+            {
+                if (position != value)
+                {
+                    position = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
 
+        private double height = 5;
 
         public double Height
         {
-            get { return (double)GetValue(HeightProperty); }
-            set { SetValue(HeightProperty, value); }
+            get { return height; }
+            set
+            {
+                if (height != value)
+                {
+                    height = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
 
-        // Using a DependencyProperty as the backing store for Height.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeightProperty =
-        DependencyPropertyEx.Register<double, ArrowModel3D>(nameof(Height), 5, (s, e) => s.AppearanceChanged(e));
-
-
+ 
+        private double offset = 5;
 
         public double Offset
         {
-
-            get { return (double)GetValue(OffsetProperty); }
-            set { SetValue(OffsetProperty, value); }
+            get { return offset; }
+            set
+            {
+                if (offset != value)
+                {
+                    offset = value;
+                    this.AppearanceChanged();
+                };
+            }
         }
-
-        // Using a DependencyProperty as the backing store for Offset.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OffsetProperty =
-        DependencyPropertyEx.Register<double, ArrowModel3D>(nameof(Offset), 5, (s, e) => s.AppearanceChanged(e));
-
-
-
+ 
         public ArrowModel3D(Point3D p, double zOffset, double height = 5, double diameter = 1)
         {
-            this.Position = new Point3D(p.X, p.Y, p.Z);
-            this.Height = height;
-            this.Offset = zOffset;
-            this.Diametr = diameter;
+            this.position = new Point3D(p.X, p.Y, p.Z);
+            this.height = height;
+            this.offset = zOffset;
+            this.diameter = diameter;
+            AppearanceChanged();
         }
 
-        protected override void AppearanceChanged(DependencyPropertyChangedEventArgs e)
+        protected override void AppearanceChanged(string caller = null)
         {
-            try
-            {
 
-                var ep = new Point3D(Position.X, Position.Y, Position.Z);
-                var sp = new Point3D(Position.X, Position.Y, Position.Z - Offset - Height);
-                var gb = new MeshBuilder();
+            var ep = new Point3D(Position.X, Position.Y, Position.Z);
+            var sp = new Point3D(Position.X, Position.Y, Position.Z - Offset - Height);
+            var gb = new MeshBuilder();
 
-                gb.AddArrow(sp, ep, Diametr, thetaDiv: this.ThetaDiv);
-                gb.AddBox(sp, Diametr * 3, Diametr * 2, Diametr / 4);
-                GeometryModel3D.Geometry = gb.ToMesh();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error with"+e.Property.Name+"message: "+ex.Message);
-            }
+            gb.AddArrow(sp, ep, Diameter, thetaDiv: this.ThetaDiv);
+            gb.AddBox(sp, Diameter * 3, Diameter * 2, Diameter / 4);
+            GeometryModel3D.Geometry = gb.ToMesh();
+
         }
+ 
     }
 }

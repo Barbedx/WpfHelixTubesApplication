@@ -15,8 +15,7 @@ namespace WpfAppDatagridGroupingHeader
         public string Caption { get; set; }
         public string c1 { get; set; }
         public string c2 { get; set; } 
-        public List<double> c5 { get; set; }
-        public Person Spouse { get; set; }
+        public List<double> c5 { get; set; } 
         public int Diametr { get; internal set; }
         public Point3D StartPosition { get; internal set; }
         public Point3D EndPosition { get; internal set; }
