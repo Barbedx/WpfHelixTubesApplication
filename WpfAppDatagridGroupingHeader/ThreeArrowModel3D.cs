@@ -9,12 +9,13 @@ namespace WpfAppDatagridGroupingHeader
     internal class ThreeArrowModel3D : ArrowModel3D
     {
 
+        
  
-
-        public ThreeArrowModel3D(Point3D p, Vector3D vDirection, double zOffset, double height = 5, double diameter = 1) : base(p, zOffset, height, diameter)
-        {
-            this.direction = vDirection; 
-        }
+        //
+        // public ThreeArrowModel3D(Point3D p, Vector3D vDirection, double zOffset, double height = 5, double diameter = 1) : base(p, zOffset, height, diameter)
+        // {
+        //     this.direction = vDirection; 
+        // }
 
 
         private Vector3D direction ;
@@ -60,6 +61,10 @@ namespace WpfAppDatagridGroupingHeader
                 gb.AddBox(sp, Diameter * 3, Diameter * 2, Diameter / 4); 
                 GeometryModel3D.Geometry = gb.ToMesh(); 
          
+        }
+
+        public ThreeArrowModel3D(ItemModel model, double diameter, Point3D position, double height, double offset) : base(model, diameter, position, height, offset)
+        {
         }
     }
 }

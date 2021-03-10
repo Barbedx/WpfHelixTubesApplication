@@ -11,6 +11,22 @@ namespace WpfAppDatagridGroupingHeader
  
         private double diameter = 10;
 
+        public ArrowModel3D(ItemModel model, double diameter, Point3D position, double height, double offset) : base(model)
+        {
+            this.diameter = diameter;
+            this.position = position;
+            this.height = height;
+            this.offset = offset;
+        }
+
+        // public ArrowModel3D(Point3D p, double zOffset, double height = 5, double diameter = 1)
+        // {
+        //     this.position = new Point3D(p.X, p.Y, p.Z);
+        //     this.height = height;
+        //     this.offset = zOffset;
+        //     this.diameter = diameter;
+        //     AppearanceChanged();
+        // }
         protected double Diameter
         {
             get => diameter;
@@ -74,14 +90,6 @@ namespace WpfAppDatagridGroupingHeader
             }
         }
  
-        public ArrowModel3D(Point3D p, double zOffset, double height = 5, double diameter = 1)
-        {
-            this.position = new Point3D(p.X, p.Y, p.Z);
-            this.height = height;
-            this.offset = zOffset;
-            this.diameter = diameter;
-            AppearanceChanged();
-        }
 
         public override void AppearanceChanged(string caller = null)
         {

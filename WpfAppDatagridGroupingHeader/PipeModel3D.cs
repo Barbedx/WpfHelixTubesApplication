@@ -71,15 +71,15 @@ namespace WpfAppDatagridGroupingHeader
         private TubeStabs tubeStabs = TubeStabs.None;
  
 
-        public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None)
-        {
-            this.startPosition = startPosition;
-            this.endPosition = endPosition;
-            this.diameter = diameter;
-            this.tubeStabs = tubeStabs;
-        }
+        // public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None)
+        // {
+        //     this.startPosition = startPosition;
+        //     this.endPosition = endPosition;
+        //     this.diameter = diameter;
+        //     this.tubeStabs = tubeStabs;
+        // }
 
-        public PipeModel3D(ItemModel model)
+        public PipeModel3D(ItemModel model) : base(model)
         {
             this.startPosition = model.StartPosition;
             this.endPosition = model.EndPosition;

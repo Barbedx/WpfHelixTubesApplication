@@ -102,7 +102,6 @@
     <Compile Include="Helpers\Bezier.cs" />
     <Compile Include="ItemModel.cs" />
     <Compile Include="ItemModel3D.cs" />
-    <Compile Include="ItemModel3DFactory.cs" />
     <Compile Include="ItemsVisual3D.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />

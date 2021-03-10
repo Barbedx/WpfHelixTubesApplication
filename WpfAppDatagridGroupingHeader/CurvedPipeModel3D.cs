@@ -18,16 +18,16 @@ namespace WpfAppDatagridGroupingHeader
 
         private Vector3D startDirection;
 
-        public CurvedPipeModel3D(Point3D startPosition, Vector3D startDirection
-            ,Vector3D endDirection
-            , double length,
-            double diameter, TubeStabs tubeStabs = TubeStabs.None)
-            : base(startPosition, new Point3D(), diameter, tubeStabs)
-        {
-            this.startDirection = startDirection;
-            this.length = length;
-            this.endDirection = endDirection;
-        }
+        // public CurvedPipeModel3D( ItemModel model, startPosition, Vector3D startDirection
+        //     ,Vector3D endDirection
+        //     , double length,
+        //     double diameter, TubeStabs tubeStabs = TubeStabs.None)
+        //     : base(model, startPosition, new Point3D(), diameter, tubeStabs)
+        // {
+        //     this.startDirection = startDirection;
+        //     this.length = length;
+        //     this.endDirection = endDirection;
+        // }
 
         public CurvedPipeModel3D(CurvedItemModel model) : base(model)
         {

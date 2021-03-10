@@ -11,24 +11,24 @@ namespace WpfAppDatagridGroupingHeader
 
         private Vector3D middlePipeDirection  ;
         
-        public TeePipeModel3D(Point3D startPosition,
-            Point3D endPosition, double diameter, Vector3D middlePipeDirection, double middlePipeLength, 
-            TubeStabs tubeStabs = TubeStabs.None) : base(startPosition,
-            endPosition, diameter, tubeStabs)
-        {
-            this.middlePipeDirection = middlePipeDirection;
-            this.middlePipeEndPoint =  ((endPosition - startPosition)/2 + middlePipeDirection).ToPoint3D();
-            
-        }
-        public TeePipeModel3D(Point3D startPosition,
-            Point3D endPosition, double diameter,  Point3D middlePipeEndPoint,
-            TubeStabs tubeStabs = TubeStabs.None) : base(startPosition,
-            endPosition, diameter, tubeStabs)
-        {
-            this.middlePipeDirection = middlePipeDirection;
-            this.middlePipeEndPoint = middlePipeEndPoint;
-        }
-
+        // public TeePipeModel3D(Point3D startPosition,
+        //     Point3D endPosition, double diameter, Vector3D middlePipeDirection, double middlePipeLength, 
+        //     TubeStabs tubeStabs = TubeStabs.None) : base(startPosition,
+        //     endPosition, diameter, tubeStabs)
+        // {
+        //     this.middlePipeDirection = middlePipeDirection;
+        //     this.middlePipeEndPoint =  ((endPosition - startPosition)/2 + middlePipeDirection).ToPoint3D();
+        //     
+        // }
+        // public TeePipeModel3D(Point3D startPosition,
+        //     Point3D endPosition, double diameter,  Point3D middlePipeEndPoint,
+        //     TubeStabs tubeStabs = TubeStabs.None) : base(startPosition,
+        //     endPosition, diameter, tubeStabs)
+        // {
+        //     this.middlePipeDirection = middlePipeDirection;
+        //     this.middlePipeEndPoint = middlePipeEndPoint;
+        // }
+ 
         public Vector3D MiddlePipeDirection
         {
             get { return middlePipeDirection; }
@@ -91,5 +91,8 @@ namespace WpfAppDatagridGroupingHeader
             GeometryModel3D.Geometry = gb.ToMesh(); 
         }
 
+        public TeePipeModel3D(ItemModel model) : base(model)
+        {
+        }
     }
 }

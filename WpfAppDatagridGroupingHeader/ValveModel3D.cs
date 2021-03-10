@@ -9,11 +9,11 @@ namespace WpfAppDatagridGroupingHeader
     internal class ValveModel3D : PipeModel3D
     {
  
-
-        public ValveModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None) 
-            : base(startPosition, endPosition, diameter, tubeStabs)
-        { 
-        }
+        //
+        // public ValveModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None) 
+        //     : base(startPosition, endPosition, diameter, tubeStabs)
+        // { 
+        // }
   
 
         public override void AppearanceChanged(string caller = null)
@@ -33,6 +33,10 @@ namespace WpfAppDatagridGroupingHeader
                 TubeStabs == TubeStabs.BackCap|| TubeStabs == TubeStabs.All,
                 ThetaDiv);
             this.GeometryModel3D.Geometry = mb.ToMesh();
+        }
+
+        public ValveModel3D(ItemModel model) : base(model)
+        {
         }
     }
 }

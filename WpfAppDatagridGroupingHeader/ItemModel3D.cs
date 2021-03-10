@@ -8,13 +8,15 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    public abstract class ItemModel3D : UIElement3D // where T : class
+    public abstract class ItemModel3D  : UIElement3D // where T:ItemModel 
     {
-        public ItemModel3D()
+        public ItemModel InnerModel { get; protected set; }
+     
+        public ItemModel3D(ItemModel model)
         {
             GeometryModel3D.Material =  MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
-
+            this.InnerModel = model;
         }
 
         public GeometryModel3D GeometryModel3D { get; } = new GeometryModel3D();

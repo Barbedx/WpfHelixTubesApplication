@@ -70,11 +70,16 @@ namespace WpfAppDatagridGroupingHeader
             GeometryModel3D.Geometry = gb.ToMesh();
         }
 
-        public CircleStubModel3D(Point3D position, Vector3D direction, double radius)
+        public CircleStubModel3D(ItemModel model) : base(model)
         {
-            Radius = radius;
-            Direction = direction;
-            Position = position;
-        } 
+            Radius = model.Radius;
+            Position = model.StartPosition;
+        }
+        // public CircleStubModel3D(Point3D position, Vector3D direction, double radius)
+        // {
+        //     Radius = radius;
+        //     Direction = direction;
+        //     Position = position;
+        // } 
     }
 }
