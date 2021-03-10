@@ -45,8 +45,7 @@ namespace WpfAppDatagridGroupingHeader
                     Diameter = 10,
                     StartPosition = new Point3D(0, 0, 0),
                     EndPosition = new Point3D(10, 0, 0),
-                    Radius = 0,
-                    Type = TubeTypes.Regular
+                    Radius = 0 
                 }
                 ,
 
@@ -55,8 +54,7 @@ namespace WpfAppDatagridGroupingHeader
                     c1 = "2lol",
                     c2 = "2kek",
                     StartPosition = new Point3D(10, 0, 0),
-                    EndPosition = new Point3D(20, 0, 0),
-                    Type = TubeTypes.Regular
+                    EndPosition = new Point3D(20, 0, 0) 
                 },
                 new CurvedItemModel(3)
                 {
@@ -66,8 +64,7 @@ namespace WpfAppDatagridGroupingHeader
                     Length = 10,
                     StartDirection = new Vector3D(100,0,0),
                     EndDirection = new Vector3D(0,100,0),
-                    TubeStabs = TubeStabs.All,
-                    Type = TubeTypes.curved,
+                    TubeStabs = TubeStabs.All, 
                     Radius = 10,
                     Diameter =  15
                 },
@@ -82,7 +79,7 @@ namespace WpfAppDatagridGroupingHeader
                 {
                     StartPosition = new Point3D(0,0,0),
                     EndPosition = new Point3D(-10,0,0),
-                    MiddlePipeEndPoint =  new Point3D(5,0,5)
+                    MiddlePipeEndPosition =  new Point3D(5,0,5)
                 },
                 new ArrowItemModel(6)
                 {
@@ -144,23 +141,29 @@ namespace WpfAppDatagridGroupingHeader
         {
             get { return this.selectedObject; }
 
-            set { this.SetValue(ref this.selectedObject, value, nameof(this.SelectedObject)); }
+            set
+            {
+                if (this.SetValue(ref this.selectedObject, value, nameof(this.SelectedObject)))
+                {
+                    this.Select3D(selectedObject?.ItemModel3D);
+                }   
+            }
         }
 
         public void Select(ItemModel visual)
         {
-            this.SelectedObject = visual;
+            this.SelectedObject = visual; 
         }
 
-        private Visual3D selectedObject3D;
-        public Visual3D SelectedObject3D
+        private IItemModel3D<ItemModel> selectedObject3D;
+        public IItemModel3D<ItemModel> SelectedObject3D
         {
             get { return this.selectedObject3D; }
 
             set { this.SetValue(ref this.selectedObject3D, value, nameof(this.selectedObject3D)); }
         }
 
-        public void Select3D(Visual3D visual)
+        public void Select3D(IItemModel3D<ItemModel> visual)
         {
             this.SelectedObject3D = visual;
         }
@@ -171,8 +174,9 @@ namespace WpfAppDatagridGroupingHeader
             var firstHit = viewport.Viewport.FindHits(e.GetPosition(viewport)).FirstOrDefault();
             if (firstHit != null)
             {
-                if (firstHit.Visual is ItemModel3D<ItemModel> model)
-                {
+                if (firstHit.Visual is IItemModel3D<ItemModel> model 
+                    )
+                { 
                     var gModel = model.GeometryModel3D;
                     gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
                     e.Handled = true;
@@ -182,7 +186,7 @@ namespace WpfAppDatagridGroupingHeader
 
                 if (firstHit.Visual is BillboardTextVisual3D bmodel)
                 {
-                  this.Select3D(bmodel);
+                  //this.Select3D(bmodel);
                   //var gModel = bmodel.geometryModel;
                   //gModel.Material = gModel.Material == Materials.Green ? Materials.Gray : Materials.Green;
                   //e.Handled = true;
@@ -228,8 +232,7 @@ namespace WpfAppDatagridGroupingHeader
                c1 = "2lol",
                c2 = "2kek",
                StartPosition = new Point3D(10, 0, 0),
-               EndPosition = new Point3D(20, 0, 0),
-               Type = TubeTypes.Regular
+               EndPosition = new Point3D(20, 0, 0) 
            });
         }
 
@@ -302,8 +305,7 @@ namespace WpfAppDatagridGroupingHeader
                     Length = 10,
                     StartDirection = new Vector3D(100, 0, 0),
                     EndDirection = new Vector3D(0, 100, 0),
-                    TubeStabs = TubeStabs.All,
-                    Type = TubeTypes.curved,
+                    TubeStabs = TubeStabs.All, 
                     Radius = 10,
                     Diameter = 15
                 });
@@ -326,7 +328,7 @@ namespace WpfAppDatagridGroupingHeader
             {
                 StartPosition = new Point3D(0,0,0),
                 EndPosition = new Point3D(-10,0,0),
-                MiddlePipeEndPoint =  new Point3D(5,0,5)
+                MiddlePipeEndPosition =  new Point3D(5,0,5)
             });
         }
     }

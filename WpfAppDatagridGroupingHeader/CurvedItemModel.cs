@@ -12,11 +12,31 @@ namespace WpfAppDatagridGroupingHeader
             this.StartDirection = startDirection;
             this.Length = length;
             this.EndDirection = endDirection;
-        } 
-        public Vector3D StartDirection { get;   set; }
-        public double Length { get;   set; }
-   
-        public Vector3D EndDirection { get;   set; }
+        }
+        private Vector3D startDirection;
+
+        public Vector3D StartDirection
+        {
+            get { return startDirection; }
+            set { this.SetValue(ref startDirection, value); }
+        }
+        private double length;
+
+        public double Length
+        {
+            get { return length; }
+            set { this.SetValue(ref length, value); }
+        }
+
+        private Vector3D endDirection;
+
+        public Vector3D EndDirection
+        {
+            get { return endDirection; }
+            set { this.SetValue(ref endDirection, value); }
+        }
+
+         
     }
 
     public class ArrowItemModel : ItemModel
@@ -24,17 +44,36 @@ namespace WpfAppDatagridGroupingHeader
         public ArrowItemModel(int iD) : base(iD)
         {
         }
+        private double height;
 
-        public double Height { get; set; }
-        public double Offset { get; set; }
+        public double Height
+        {
+            get { return height; }
+            set { this.SetValue(ref height, value); }
+        }
+
+        private double offset;
+
+        public double Offset
+        {
+            get { return offset; }
+            set { this.SetValue(ref offset, value); }
+        }
+         
     }
     public class CircleStubModel : ItemModel
     {
         public CircleStubModel(int iD) : base(iD)
         {
         }
+        private Vector3D direction;
 
-        public Vector3D Direction { get; set; }
+        public Vector3D Direction
+        {
+            get { return direction; }
+            set { this.SetValue(ref direction, value); }
+        }
+         
     }
     public class TeePipeItemModel : ItemModel
     {
@@ -42,8 +81,22 @@ namespace WpfAppDatagridGroupingHeader
         {
         }
 
-        public Point3D MiddlePipeEndPoint { get; set; }
-        public Vector3D MiddlePipeDirection { get; set; }
+        private Point3D middlePipePosition;
+
+        public Point3D MiddlePipeEndPosition
+        {
+            get { return middlePipePosition; }
+            set { this.SetValue(ref middlePipePosition, value); }
+        }
+
+        private Vector3D middlePipeDirection;
+
+        public Vector3D MiddlePipeDirection
+        {
+            get { return middlePipeDirection; }
+            set { this.SetValue(ref middlePipeDirection, value); }
+        }
+         
     }
     public class ThreeArrowItemModel : ArrowItemModel
     {
@@ -51,7 +104,14 @@ namespace WpfAppDatagridGroupingHeader
         {
         }
 
-        public Vector3D Direction { get; set; }
+        private Vector3D direction;
+
+        public Vector3D Direction
+        {
+            get { return direction; }
+            set { this.SetValue(ref direction, value); }
+        }
+
     }
 
     public class ValveItemModel : ItemModel

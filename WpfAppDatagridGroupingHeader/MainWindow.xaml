@@ -8,9 +8,9 @@
         
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:h="http://helix-toolkit.org/wpf" xmlns:converters="clr-namespace:WpfAppDatagridGroupingHeader.Converters"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <local:MainWindow></local:MainWindow>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Window.Resources>
          <local:UnitsConverter x:Key="UnitConverter"/>
  
@@ -111,7 +111,7 @@
                         <Label>Super Header 2</Label>
                     </Border>
                 </Grid>
-                <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedObject}" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0"  >
+                <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedObject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0"  >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding=  "{Binding StartPosition}" Header="column 1" Width="200" x:Name="Column1" />
                         <DataGridTextColumn Binding = "{Binding EndPosition}" Header="column 2" Width="80" x:Name="Column2"/>

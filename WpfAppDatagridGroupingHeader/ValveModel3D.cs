@@ -23,9 +23,8 @@ namespace WpfAppDatagridGroupingHeader
             var centerY = (StartPosition.Y  + EndPosition.Y ) / 2;
             var centerZ = (StartPosition.Z +  EndPosition.Z ) / 2;
             var centerPoint = new Point3D(centerX, centerY, centerZ); 
-            mb.AddCone(StartPosition, centerPoint, Diameter/2,true, ThetaDiv);
-            mb.AddCone(EndPosition, centerPoint, Diameter/2, true, ThetaDiv);
-            
+          
+
             mb.AddCone(StartPosition, centerPoint, this.Diameter,
                 TubeStabs == TubeStabs.FrontCap|| TubeStabs == TubeStabs.All
                 , ThetaDiv);

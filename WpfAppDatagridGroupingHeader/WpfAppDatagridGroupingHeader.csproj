@@ -100,6 +100,7 @@
     <Compile Include="Extensions\PointExtension.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Helpers\Bezier.cs" />
+    <Compile Include="IItemModel3D.cs" />
     <Compile Include="ItemModel.cs" />
     <Compile Include="ItemModel3D.cs" />
     <Compile Include="ItemsVisual3D.cs" />

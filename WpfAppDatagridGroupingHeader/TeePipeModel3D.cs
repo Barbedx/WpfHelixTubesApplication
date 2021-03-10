@@ -11,10 +11,8 @@ namespace WpfAppDatagridGroupingHeader
  
         public Vector3D MiddlePipeDirection => InnerModel.MiddlePipeDirection;
         
-
-        private Point3D middlePipeEndPoint;
-
-        public Point3D MiddlePipeEndPoint => InnerModel.MiddlePipeEndPoint;
+         
+        public Point3D MiddlePipeEndPoint => InnerModel.MiddlePipeEndPosition;
          
 
         public override void AppearanceChanged(string caller = null)

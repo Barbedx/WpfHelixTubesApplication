@@ -32,17 +32,38 @@ namespace WpfAppDatagridGroupingHeader
             }
         }
 
-        public Point3D StartPosition { get; set; }
-        public Point3D EndPosition { get; set; }
-        public int Radius { get; set; } = 0;
-        public TubeTypes Type { get; set; }
-        public TubeStabs TubeStabs { get; set; }
+        private Point3D startPosition;
 
-    }
+        public Point3D StartPosition
+        {
+            get { return startPosition; }
+            set { this.SetValue(ref startPosition, value); }
+        }
 
-    public enum TubeTypes
-    {
-        Regular,
-        curved
+        private Point3D endPosition;
+
+        public Point3D EndPosition
+        {
+            get { return endPosition; }
+            set { this.SetValue(ref endPosition, value); }
+        }
+
+        private double radius;
+
+        public double Radius
+        {
+            get { return radius; }
+            set { this.SetValue(ref radius, value); }
+        }
+
+        private TubeStabs tubeStabs;
+
+        public TubeStabs TubeStabs
+        {
+            get { return tubeStabs; }
+            set { this.SetValue(ref tubeStabs, value); }
+        }
+public        IItemModel3D<ItemModel> ItemModel3D { get; set; }
     }
+     
 }

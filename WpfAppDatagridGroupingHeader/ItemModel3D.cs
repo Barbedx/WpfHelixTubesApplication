@@ -7,17 +7,21 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    public abstract class ItemModel3D<T> : UIElement3D where T : INotifyPropertyChanged
+    public abstract class ItemModel3D<T> : UIElement3D ,IItemModel3D<T> where T : ItemModel, INotifyPropertyChanged
     {
         public T InnerModel { get; protected set; }
 
         public ItemModel3D(T model)
         {
+            model.ItemModel3D = this;
+
             GeometryModel3D.Material = MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
             this.InnerModel = model;
             model.PropertyChanged += Model_PropertyChanged;
+            
             AppearanceChanged("base_ctor");
+
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -44,5 +48,6 @@ namespace WpfAppDatagridGroupingHeader
                 ;
             }
         }
+         
     }
 }
