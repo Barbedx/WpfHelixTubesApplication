@@ -15,16 +15,12 @@
         
         <local:DataTemplate3D x:Key="BillboardTemplate">
             <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
-
-                <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetY="{Binding Diametr}"/>
+                 <ModelVisual3D.Transform>
+                    <TranslateTransform3D OffsetY="{Binding Diameter}"/>
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
-
-        <local:DataTemplate3D x:Key="{x:Type local:CurvedItemModel}">
-            <local:CurvedPipeModel3D  Binding="{Binding ItemModel3D}"></local:CurvedPipeModel3D> 
-        </local:DataTemplate3D>
+ 
     </Window.Resources>
 
     <DockPanel Background="blue" LastChildFill="True">
@@ -80,20 +76,14 @@
             MouseDown="HelixViewport3D_MouseDown">
                 <h:SunLight/>
 
-                <h:GridLinesVisual3D Fill="Gray"   />
-                <ModelVisual3D>
-                    <!--<h:TubeVisual3D Path="0 0 0  5 0 0  5 5 0 " />
-                    <h:HelixVisual3D Origin="10 0 0"  Radius="5" Length="0"  Turns="0.25" />-->
+                <h:GridLinesVisual3D Fill="Gray"    />
 
 
-                    <!--<h:TubeVisual3D Path="0 0 0  0 10 0  10 10 0 "/>-->
-                </ModelVisual3D>
-
-                <!--<local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />-->
-                <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource 3DTemplate}"  RefreshChildrenOnChange="True" />
+                <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />
+                <local:ItemsVisual3D ItemsSource="{Binding Items}"   RefreshChildrenOnChange="True" />
                 <!--<local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />-->
 
-                <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
+                <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject3D, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
             </h:HelixViewport3D>
 
             <GridSplitter Grid.Row = "1" ResizeDirection="Rows" Height="4" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>

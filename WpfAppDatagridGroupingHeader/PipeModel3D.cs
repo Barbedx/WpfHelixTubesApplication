@@ -27,45 +27,45 @@ namespace WpfAppDatagridGroupingHeader
 
         public Point3D StartPosition
         {
-            get { return startPosition; }
-            set
-            {
-                if (startPosition != value)
-                {
-                    startPosition = value;
-                    this.AppearanceChanged();
-                };
-            }
+            get { return InnerModel.StartPosition; }
+            //set
+            //{
+            //    if (startPosition != value)
+            //    {
+            //        startPosition = value;
+            //        this.AppearanceChanged();
+            //    };
+            //}
         }
 
         private Point3D endPosition  ;
 
         public Point3D EndPosition
         {
-            get { return endPosition; }
-            set
-            {
-                if (endPosition != value)
-                {
-                    endPosition = value;
-                    this.AppearanceChanged();
-                };
-            }
+            get { return InnerModel.EndPosition; }
+            //set
+            //{
+            //    if (endPosition != value)
+            //    {
+            //        endPosition = value;
+            //        this.AppearanceChanged();
+            //    };
+            //}
         }
 
         private double diameter;
 
         public double Diameter
         {
-            get { return diameter; }
-            set
-            {
-                if (diameter != value)
-                {
-                    diameter = value;
-                    this.AppearanceChanged();
-                };
-            }
+            get { return InnerModel.Diameter; }
+            //set
+            //{
+            //    if (diameter != value)
+            //    {
+            //        diameter = value;
+            //        this.AppearanceChanged();
+            //    };
+            //}
         }
 
         private TubeStabs tubeStabs = TubeStabs.None;
@@ -83,7 +83,7 @@ namespace WpfAppDatagridGroupingHeader
         {
             this.startPosition = model.StartPosition;
             this.endPosition = model.EndPosition;
-            this.diameter = model.Diametr;
+            this.diameter = model.Diameter;
             this.TubeStabs = TubeStabs.None;
         }
 

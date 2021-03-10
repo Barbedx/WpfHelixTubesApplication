@@ -17,6 +17,12 @@ namespace WpfAppDatagridGroupingHeader
             GeometryModel3D.Material =  MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
             this.InnerModel = model;
+            model.PropertyChanged += Model_PropertyChanged;
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            AppearanceChanged(e.PropertyName);
         }
 
         public GeometryModel3D GeometryModel3D { get; } = new GeometryModel3D();

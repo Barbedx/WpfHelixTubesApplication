@@ -34,8 +34,9 @@ namespace WpfAppDatagridGroupingHeader
             this.startDirection = model.startDirection;
             this.length = model.length;
             this.endDirection = model.endDirection;
+           
         }
-
+ 
         public Vector3D StartDirection
         {
             get { return startDirection; }
@@ -102,7 +103,7 @@ namespace WpfAppDatagridGroupingHeader
             var vector = StartDirection + EndDirection;
             vector *= Length;
             var ep = StartPosition + vector;
-            EndPosition = ep;
+            //EndPosition = ep; //TODO:Check if we need it ??
 
             var l = new geo.Line3d(StartPosition.ToGeometRIPoint3D(), StartDirection.ToGeometRIVector3D());
             var l2 = new geo.Line3d(EndPosition.ToGeometRIPoint3D(), EndDirection.ToGeometRIVector3D());
@@ -127,13 +128,6 @@ namespace WpfAppDatagridGroupingHeader
 
             }
 
-        }
-        //internal void Rotate(double angle)
-        //{
-        //    var vector = this.Bezier.points[1] - this.Bezier.points[0];
-        //    var rotation = new AxisAngleRotation3D(vector.ToVector3D(), angle);
-        //    this.Transform = new RotateTransform3D(rotation);
-        //    var newEndPosition = this.Transform.Transform(EndPosition);
-        //}
+        } 
     }
 }
