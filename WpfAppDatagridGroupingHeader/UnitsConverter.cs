@@ -9,21 +9,7 @@ using System.Windows.Data;
 namespace WpfAppDatagridGroupingHeader
 {
 
-    public class ItemModel3DConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value )
-            {
-                
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+ 
     public class UnitsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

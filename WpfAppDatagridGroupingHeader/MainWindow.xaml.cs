@@ -48,6 +48,7 @@ namespace WpfAppDatagridGroupingHeader
                     Radius = 0,
                     Type = TubeTypes.Regular
                 },
+
                 new ItemModel(2)
                 {
                     c1 = "2lol",
@@ -75,6 +76,10 @@ namespace WpfAppDatagridGroupingHeader
                     Radius = 30
                 }
             };
+            foreach (var item in res)
+            {
+                item.ItemModel3D = new PipeModel3D(item);
+            }
             //var allItems = new List<ItemModel>(res
             //    .Where(x => x.Type == TubeTypes.Regular)
             //    .Select(x => new PipeModel3D(x.StartPosition, x.EndPosition, x.Radius)));

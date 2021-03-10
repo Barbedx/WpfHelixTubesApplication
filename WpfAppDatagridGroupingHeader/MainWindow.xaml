@@ -9,10 +9,10 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:h="http://helix-toolkit.org/wpf" xmlns:converters="clr-namespace:WpfAppDatagridGroupingHeader.Converters"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <local:MyVisualModel3dDataTemplateSelector3D x:Key="MyVisualModel3dDataTemplateSelector3D"/>
-        <local:UnitsConverter x:Key="UnitConverter"/>
-        <local:ItemModel3DConverter x:Key="ItemModel3DConverter"/>
+         <local:UnitsConverter x:Key="UnitConverter"/>
+ 
         <converters:BoundsConverter x:Key="BoundsConverter"/>
+        
         <local:DataTemplate3D x:Key="BillboardTemplate">
             <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
 
@@ -21,27 +21,10 @@
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
-        <!--<local:DataTemplate3D x:Key="{x:Type local:Tube3D}">
-            <h:TubeVisual3D>
-                <h:TubeVisual3D.Material>
-                    <DiffuseMaterial Brush="Blue"/>
-                </h:TubeVisual3D.Material>
-            </h:TubeVisual3D>
-        </local:DataTemplate3D>-->
 
-        <!--<local:DataTemplate3D x:Key="{x:Type local:TubeModel}">
-            <ModelVisual3D>
-                
-            <local:Tube3D StartPosition="{Binding StartPosition}" EndPosition="{Binding EndPosition}" >
-                -->
-        <!--local:Tube3D.Transform>
-                        <TranslateTransform3D OffsetX="{Binding Position.X}" OffsetY="{Binding Position.Y}" OffsetZ="{Binding Position.Z}" />
-                    </local:Tube3D.Transform>-->
-        <!--
-                </local:Tube3D>
-                <h:BillboardTextVisual3D Text="wtf" Position="{Binding StartPosition}"/>
-            </ModelVisual3D>
-        </local:DataTemplate3D>-->
+        <local:DataTemplate3D x:Key="3DTemplate">
+            <local:   Binding="{Binding ItemModel3D}"></local:> 
+        </local:DataTemplate3D>
     </Window.Resources>
 
     <DockPanel Background="blue" LastChildFill="True">
@@ -107,8 +90,8 @@
                 </ModelVisual3D>
 
                 <!--<local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />-->
-                <local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />
-                <local:ItemsVisual3D ItemsSource="{Binding Items, Converter={StaticResource ItemModel3DConverter}}"  RefreshChildrenOnChange="True" />
+                <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource 3DTemplate}"  RefreshChildrenOnChange="True" />
+                <!--<local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />-->
 
                 <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
             </h:HelixViewport3D>
