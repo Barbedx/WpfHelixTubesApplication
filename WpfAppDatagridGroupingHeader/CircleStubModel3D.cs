@@ -11,53 +11,14 @@ namespace WpfAppDatagridGroupingHeader
 {
 
 
-    internal class CircleStubModel3D : ItemModel3D
+    internal class CircleStubModel3D : ItemModel3D<CircleStubModel>
     {
-
-        private double radius;
-
-        public double Radius
-        {
-            get { return radius; }
-            set
-            {
-                if(radius != value){
-                    radius = value;
-                    this.AppearanceChanged();
-                };
-            }
-        }
-
-        private Vector3D direction ;
-
-        public Vector3D Direction
-        {
-            get { return direction; }
-            set
-            {
-                if (direction != value)
-                {
-                    direction = value;
-                    this.AppearanceChanged();
-                };
-            }
-        }
-
-        private Point3D position;
-
-        public Point3D Position
-        {
-            get { return position; }
-            set
-            {
-                if (position != value)
-                {
-                    position = value;
-                    this.AppearanceChanged();
-                };
-            }
-        }
-
+ 
+        public double Radius => InnerModel.Radius;
+         
+        public Vector3D Direction => InnerModel.Direction;
+  
+        public Point3D Position => InnerModel.StartPosition; 
  
 
 
@@ -70,16 +31,9 @@ namespace WpfAppDatagridGroupingHeader
             GeometryModel3D.Geometry = gb.ToMesh();
         }
 
-        public CircleStubModel3D(ItemModel model) : base(model)
-        {
-            Radius = model.Radius;
-            Position = model.StartPosition;
+        public CircleStubModel3D(CircleStubModel model) : base(model)
+        { 
         }
-        // public CircleStubModel3D(Point3D position, Vector3D direction, double radius)
-        // {
-        //     Radius = radius;
-        //     Direction = direction;
-        //     Position = position;
-        // } 
+      
     }
 }

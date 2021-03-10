@@ -6,33 +6,10 @@ using HelixToolkit.Wpf;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    internal class ThreeArrowModel3D : ArrowModel3D
+    internal class ThreeArrowModel3D :  ArrowModel3D<ThreeArrowItemModel>
     {
 
-        
- 
-        //
-        // public ThreeArrowModel3D(Point3D p, Vector3D vDirection, double zOffset, double height = 5, double diameter = 1) : base(p, zOffset, height, diameter)
-        // {
-        //     this.direction = vDirection; 
-        // }
-
-
-        private Vector3D direction ;
-
-        public Vector3D Direction
-        {
-            get { return direction; }
-            set
-            {
-                if (direction != value)
-                {
-                    direction = value;
-                    this.AppearanceChanged();
-                };
-            }
-        }
-
+        public Vector3D Direction => InnerModel.Direction; 
          
 
         public override void AppearanceChanged(string caller = null)
@@ -63,7 +40,7 @@ namespace WpfAppDatagridGroupingHeader
          
         }
 
-        public ThreeArrowModel3D(ItemModel model, double diameter, Point3D position, double height, double offset) : base(model, diameter, position, height, offset)
+        public ThreeArrowModel3D(ThreeArrowItemModel model) : base(model)
         {
         }
     }

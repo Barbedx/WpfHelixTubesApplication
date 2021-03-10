@@ -19,87 +19,22 @@ namespace WpfAppDatagridGroupingHeader
         All
     }
 
-    internal class PipeModel3D : ItemModel3D
+    internal class PipeModel3D<T> : ItemModel3D<T> where T:ItemModel
     {
 
-        #region properties
-        private Point3D startPosition ;
-
-        public Point3D StartPosition
-        {
-            get { return InnerModel.StartPosition; }
-            //set
-            //{
-            //    if (startPosition != value)
-            //    {
-            //        startPosition = value;
-            //        this.AppearanceChanged();
-            //    };
-            //}
-        }
-
-        private Point3D endPosition  ;
-
-        public Point3D EndPosition
-        {
-            get { return InnerModel.EndPosition; }
-            //set
-            //{
-            //    if (endPosition != value)
-            //    {
-            //        endPosition = value;
-            //        this.AppearanceChanged();
-            //    };
-            //}
-        }
-
-        private double diameter;
-
-        public double Diameter
-        {
-            get { return InnerModel.Diameter; }
-            //set
-            //{
-            //    if (diameter != value)
-            //    {
-            //        diameter = value;
-            //        this.AppearanceChanged();
-            //    };
-            //}
-        }
-
-        private TubeStabs tubeStabs = TubeStabs.None;
+        #region properties 
+        public Point3D StartPosition => InnerModel.StartPosition;
  
+        public Point3D EndPosition => InnerModel.EndPosition;
+ 
+        public double Diameter => InnerModel.Diameter;
 
-        // public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None)
-        // {
-        //     this.startPosition = startPosition;
-        //     this.endPosition = endPosition;
-        //     this.diameter = diameter;
-        //     this.tubeStabs = tubeStabs;
-        // }
-
-        public PipeModel3D(ItemModel model) : base(model)
+        public TubeStabs TubeStabs => InnerModel.TubeStabs;// TubeStabs.None;
+  
+        public PipeModel3D(T model) : base(model)
         {
-            this.startPosition = model.StartPosition;
-            this.endPosition = model.EndPosition;
-            this.diameter = model.Diameter;
-            this.TubeStabs = TubeStabs.None;
-        }
-
-        public TubeStabs TubeStabs
-        {
-            get { return tubeStabs; }
-            set
-            {
-                if (tubeStabs != value)
-                {
-                    tubeStabs = value;
-                    this.AppearanceChanged();
-                };
-            }
-        }
-         
+     
+        } 
         #endregion
 
         public override void AppearanceChanged(string caller = null)
@@ -110,11 +45,10 @@ namespace WpfAppDatagridGroupingHeader
                    diameter: this.Diameter,
                    thetaDiv: ThetaDiv,
                    isTubeClosed: false,
-                   TubeStabs == TubeStabs.FrontCap|| TubeStabs == TubeStabs.All,
-                   TubeStabs == TubeStabs.BackCap|| TubeStabs == TubeStabs.All
+                   TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.FrontCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All,
+                   TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.BackCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All
                    );
-            //GeometryModel3D.Material = this.Material;// MaterialHelper.CreateMaterial(Brushes.Red);
-            //GeometryModel3D.BackMaterial = this.BackMaterial;
+ 
             GeometryModel3D.Geometry = gb.ToMesh();
         }
 

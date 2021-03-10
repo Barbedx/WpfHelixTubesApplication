@@ -8,13 +8,16 @@
         
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:h="http://helix-toolkit.org/wpf" xmlns:converters="clr-namespace:WpfAppDatagridGroupingHeader.Converters"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindow></local:MainWindow>
+    </Window.DataContext>
     <Window.Resources>
          <local:UnitsConverter x:Key="UnitConverter"/>
  
         <converters:BoundsConverter x:Key="BoundsConverter"/>
         
         <local:DataTemplate3D x:Key="BillboardTemplate">
-            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Caption}" DepthOffset="0.1" >
+            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Id}" DepthOffset="0.1" >
                  <ModelVisual3D.Transform>
                     <TranslateTransform3D OffsetY="{Binding Diameter}"/>
                 </ModelVisual3D.Transform>

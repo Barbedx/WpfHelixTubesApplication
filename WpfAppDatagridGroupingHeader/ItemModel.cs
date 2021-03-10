@@ -36,8 +36,7 @@ namespace WpfAppDatagridGroupingHeader
         public Point3D EndPosition { get; set; }
         public int Radius { get; set; } = 0;
         public TubeTypes Type { get; set; }
-        public ItemModel3D ItemModel3D { get; set; }
-
+        public TubeStabs TubeStabs { get; set; }
 
     }
 

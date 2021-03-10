@@ -6,7 +6,7 @@ using HelixToolkit.Wpf;
 
 namespace WpfAppDatagridGroupingHeader
 {
-    internal class ValveModel3D : PipeModel3D
+    internal class ValveModel3D : PipeModel3D<ValveItemModel>
     {
  
         //
@@ -35,7 +35,7 @@ namespace WpfAppDatagridGroupingHeader
             this.GeometryModel3D.Geometry = mb.ToMesh();
         }
 
-        public ValveModel3D(ItemModel model) : base(model)
+        public ValveModel3D(ValveItemModel model) : base(model)
         {
         }
     }
