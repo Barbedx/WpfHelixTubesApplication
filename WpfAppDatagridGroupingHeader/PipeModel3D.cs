@@ -69,13 +69,22 @@ namespace WpfAppDatagridGroupingHeader
         }
 
         private TubeStabs tubeStabs = TubeStabs.None;
+ 
 
-        public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None):base()
+        public PipeModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None)
         {
             this.startPosition = startPosition;
             this.endPosition = endPosition;
             this.diameter = diameter;
             this.tubeStabs = tubeStabs;
+        }
+
+        public PipeModel3D(ItemModel model)
+        {
+            this.startPosition = model.StartPosition;
+            this.endPosition = model.EndPosition;
+            this.diameter = model.Diametr;
+            this.TubeStabs = TubeStabs.None;
         }
 
         public TubeStabs TubeStabs
@@ -93,7 +102,7 @@ namespace WpfAppDatagridGroupingHeader
          
         #endregion
 
-        protected override void AppearanceChanged(string caller = null)
+        public override void AppearanceChanged(string caller = null)
         {
             var gb = new MeshBuilder();
 

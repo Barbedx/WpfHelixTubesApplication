@@ -29,6 +29,13 @@ namespace WpfAppDatagridGroupingHeader
             this.endDirection = endDirection;
         }
 
+        public CurvedPipeModel3D(CurvedItemModel model) : base(model)
+        {
+            this.startDirection = model.startDirection;
+            this.length = model.length;
+            this.endDirection = model.endDirection;
+        }
+
         public Vector3D StartDirection
         {
             get { return startDirection; }
@@ -84,7 +91,7 @@ namespace WpfAppDatagridGroupingHeader
         }
  
         //private Bezier Bezier { get; set; }
-        protected override void AppearanceChanged([CallerMemberName] string caller = null)
+        public override void AppearanceChanged([CallerMemberName] string caller = null)
         {
             if (caller == nameof(EndPosition))
             {

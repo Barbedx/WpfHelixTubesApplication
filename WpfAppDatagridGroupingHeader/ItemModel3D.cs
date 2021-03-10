@@ -14,12 +14,12 @@ namespace WpfAppDatagridGroupingHeader
         {
             GeometryModel3D.Material =  MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
-            AppearanceChanged();
+
         }
 
-        public GeometryModel3D GeometryModel3D { get; set; } = new GeometryModel3D();
+        public GeometryModel3D GeometryModel3D { get; } = new GeometryModel3D();
 
-        protected abstract void AppearanceChanged([CallerMemberName] string caller = null);
+        public abstract void AppearanceChanged([CallerMemberName] string caller = null);
          
         private int thetaDiv= 19;
 

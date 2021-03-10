@@ -59,7 +59,7 @@ namespace WpfAppDatagridGroupingHeader
 
          
 
-        protected override void AppearanceChanged(string caller = null)
+        public override void AppearanceChanged(string caller = null)
         {
             var gb = new MeshBuilder();
 

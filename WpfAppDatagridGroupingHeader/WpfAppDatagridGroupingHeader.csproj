@@ -90,6 +90,7 @@
     <Compile Include="ArrowModel3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
+    <Compile Include="CurvedItemModel.cs" />
     <Compile Include="CurvedPipeModel3D.cs" />
     <Compile Include="DataTemplate3D.cs" />
     <Compile Include="DataTemplateSelector3D.cs" />
@@ -102,9 +103,10 @@
     <Compile Include="ItemModel.cs" />
     <Compile Include="ItemModel3D.cs" />
     <Compile Include="ItemModel3DFactory.cs" />
-    <Compile Include="ItemVisual3D.cs" />
+    <Compile Include="ItemsVisual3D.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="MultiBindingConverter.cs" />
+    <Compile Include="MyVisualModel3DDataTemplate.cs" />
     <Compile Include="PipeModel3D.cs" />
     <Compile Include="CircleStubModel3D.cs" />
     <Compile Include="TeePipeModel3D.cs" />

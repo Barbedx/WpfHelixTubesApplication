@@ -4,6 +4,8 @@ using WpfAppDatagridGroupingHeader.Extensions;
 
 namespace WpfAppDatagridGroupingHeader
 {
+
+
     internal class DefaultDataTemplateSelctor3D : DataTemplateSelector3D
     {
         public override DataTemplate3D SelectTemplate(object item, DependencyObject container)

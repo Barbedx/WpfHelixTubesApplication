@@ -43,7 +43,7 @@ namespace WpfAppDatagridGroupingHeader
         ///     The item template selector property
         /// </summary>
        public static readonly DependencyProperty ItemTemplateSelectorProperty = DependencyProperty.Register(
-           "ItemTemplateSelector", typeof(DataTemplateSelector3D), typeof(ItemsVisual3D), new PropertyMetadata(new DefaultDataTemplateSelctor3D()));
+           "ItemTemplateSelector", typeof(DataTemplateSelector3D), typeof(ItemsVisual3D), new PropertyMetadata(new MyVisualModel3dDataTemplateSelector3D()));
 
         /// <summary>
         ///     The items source property
@@ -143,14 +143,12 @@ namespace WpfAppDatagridGroupingHeader
         /// </exception>
         private void ItemsSourceChanged(DependencyPropertyChangedEventArgs e)
         {
-            var oldObservableCollection = e.OldValue as INotifyCollectionChanged;
-            if (oldObservableCollection != null)
+            if (e.OldValue is INotifyCollectionChanged oldObservableCollection)
             {
                 oldObservableCollection.CollectionChanged -= this.CollectionChanged;
             }
 
-            var observableCollection = e.NewValue as INotifyCollectionChanged;
-            if (observableCollection != null)
+            if (e.NewValue is INotifyCollectionChanged observableCollection)
             {
                 observableCollection.CollectionChanged += this.CollectionChanged;
             }

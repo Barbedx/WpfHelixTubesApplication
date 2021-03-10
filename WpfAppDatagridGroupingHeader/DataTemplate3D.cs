@@ -60,7 +60,7 @@ namespace WpfAppDatagridGroupingHeader
         /// </summary>
         /// <param name="dataContext">The source object for all data bindings on the new object.</param>
         /// <returns>A clone of the template object.</returns>
-        public Visual3D CreateItem(object dataContext)
+        public virtual Visual3D CreateItem(object dataContext)
         {
             if (contentXamlSerialized == null)
             {

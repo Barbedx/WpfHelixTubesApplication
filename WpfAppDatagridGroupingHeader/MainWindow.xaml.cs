@@ -27,7 +27,7 @@ namespace WpfAppDatagridGroupingHeader
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<ItemModel3D> Items { get; set; }
+        public ObservableCollection<ItemModel> Items { get; set; }
 
         //public ObservableCollection<TubeModel> Items { get; set; }
         public MainWindow()
@@ -75,11 +75,11 @@ namespace WpfAppDatagridGroupingHeader
                     Radius = 30
                 }
             };
-            var allItems = new List<ItemModel3D>(res
-                .Where(x => x.Type == TubeTypes.Regular)
-                .Select(x => new PipeModel3D(x.StartPosition, x.EndPosition, x.Radius)));
+            //var allItems = new List<ItemModel>(res
+            //    .Where(x => x.Type == TubeTypes.Regular)
+            //    .Select(x => new PipeModel3D(x.StartPosition, x.EndPosition, x.Radius)));
 
-            Items = new ObservableCollection<ItemModel3D>(allItems);
+            Items = res;// new ObservableCollection<ItemModel>(allItems);
             this.DataContext = this;
         }
 
@@ -116,7 +116,7 @@ namespace WpfAppDatagridGroupingHeader
         {
             get { return this.selectedObject; }
 
-            set { this.SetValue(ref this.selectedObject, value, nameof(this.SelectedObject)); }
+            set     { this.SetValue(ref this.selectedObject, value, nameof(this.SelectedObject)); }
         }
 
         public void Select(Visual3D visual)
@@ -187,7 +187,7 @@ namespace WpfAppDatagridGroupingHeader
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Items.Add(new PipeModel3D(new Point3D(), new Point3D(), 5));
+         //   Items.Add(new PipeModel3D(new Point3D(), new Point3D(), 5));
         }
 
         private void RemoveClick(object sender, RoutedEventArgs e)
@@ -205,13 +205,13 @@ namespace WpfAppDatagridGroupingHeader
         //} 
         private void Add_valve_btn(object sender, RoutedEventArgs e)
         {
-            Items.Add(new ValveModel3D(new Point3D(), new Point3D(10, 0, 0), 5));
+           // Items.Add(new ValveModel3D(new Point3D(), new Point3D(10, 0, 0), 5));
         }
 
         private void Add_Arrow_btn(object sender, RoutedEventArgs e)
         {
-            Items.Add(new ArrowModel3D(new Point3D(20, 0, 0), 5));
-            Items.Add(new ArrowModel3D(new Point3D(0, 0, 0), 5));
+           // Items.Add(new ArrowModel3D(new Point3D(20, 0, 0), 5));
+          //  Items.Add(new ArrowModel3D(new Point3D(0, 0, 0), 5));
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -228,36 +228,36 @@ namespace WpfAppDatagridGroupingHeader
 
         private void Add_arrows_btn(object sender, RoutedEventArgs e)
         {
-            Items.Add(new ThreeArrowModel3D(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), 5));
+         //   Items.Add(new ThreeArrowModel3D(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), 5));
         }
 
         private void Add_Curved_pipe(object sender, RoutedEventArgs e)
         {
-            Items.Add(new CurvedPipeModel3D(
-                 new Point3D(0, 0, 0),
-                 new Vector3D(0, 1, 0),
-                 endDirection:new Vector3D(0,200,0),
-                 10, 5));
+            //Items.Add(new CurvedPipeModel3D(
+            //     new Point3D(0, 0, 0),
+            //     new Vector3D(0, 1, 0),
+            //     endDirection:new Vector3D(0,200,0),
+            //     10, 5));
         }
 
         private void Add_squere_stub(object sender, RoutedEventArgs e)
         {
-            Items.Add(new CircleStubModel3D(new Point3D(0, 0, 0), new Vector3D(1, 0, 0), 5));
+           // Items.Add(new CircleStubModel3D(new Point3D(0, 0, 0), new Vector3D(1, 0, 0), 5));
         }
 
         private void Add_tee_pipe(object sender, RoutedEventArgs e)
         {
-            Items.Add(new TeePipeModel3D(new Point3D(0, -20, 0)
-                , new Point3D(10, -20, 0)
-                , 5
-                , new Vector3D(0, -10, 0)
-                , 10));
+            //Items.Add(new TeePipeModel3D(new Point3D(0, -20, 0)
+            //    , new Point3D(10, -20, 0)
+            //    , 5
+            //    , new Vector3D(0, -10, 0)
+            //    , 10));
             
-            Items.Add(new TeePipeModel3D(new Point3D(0, 0, 0)
-                , new Point3D(10, 0, 0)
-                , 5
-                , new Point3D(5, 5, 0)
-                ));
+            //Items.Add(new TeePipeModel3D(new Point3D(0, 0, 0)
+            //    , new Point3D(10, 0, 0)
+            //    , 5
+            //    , new Point3D(5, 5, 0)
+            //    ));
         }
     }
 }

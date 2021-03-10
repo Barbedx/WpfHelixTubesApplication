@@ -83,7 +83,7 @@ namespace WpfAppDatagridGroupingHeader
             AppearanceChanged();
         }
 
-        protected override void AppearanceChanged(string caller = null)
+        public override void AppearanceChanged(string caller = null)
         {
 
             var ep = new Point3D(Position.X, Position.Y, Position.Z);

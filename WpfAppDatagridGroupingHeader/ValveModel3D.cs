@@ -16,7 +16,7 @@ namespace WpfAppDatagridGroupingHeader
         }
   
 
-        protected override void AppearanceChanged(string caller = null)
+        public override void AppearanceChanged(string caller = null)
         {
             var mb = new MeshBuilder();
             var centerX = (StartPosition.X  + EndPosition.X) / 2;
