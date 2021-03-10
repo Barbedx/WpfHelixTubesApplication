@@ -22,8 +22,8 @@
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
 
-        <local:DataTemplate3D x:Key="3DTemplate">
-            <local:   Binding="{Binding ItemModel3D}"></local:> 
+        <local:DataTemplate3D x:Key="{x:Type local:CurvedItemModel}">
+            <local:CurvedPipeModel3D  Binding="{Binding ItemModel3D}"></local:CurvedPipeModel3D> 
         </local:DataTemplate3D>
     </Window.Resources>
 
