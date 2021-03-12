@@ -1,14 +1,15 @@
 ﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
+using WpfAppDatagridGroupingHeader.Models;
 
 namespace WpfAppDatagridGroupingHeader.Models3D
 {
     internal class FakePillarModel3D : ItemModel3D<FakePillarModel> 
     {
-        protected double Diameter => InnerModel.Diameter;
-        public Point3D Position => InnerModel.StartPosition; 
-        public double Height => InnerModel.Height; 
-        public double Offset => InnerModel.Offset; 
+        private double Diameter => InnerModel.Diameter;
+        private Point3D Position => InnerModel.StartPosition;
+        private double Height => InnerModel.Height;
+        private double Offset => InnerModel.Offset; 
         
         public FakePillarModel3D(FakePillarModel model) : base(model)
         {

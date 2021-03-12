@@ -3,6 +3,8 @@
 using HelixToolkit.Wpf;
 
 using WpfAppDatagridGroupingHeader.Extensions;
+using WpfAppDatagridGroupingHeader.Models;
+using WpfAppDatagridGroupingHeader.Models3D;
 
 namespace WpfAppDatagridGroupingHeader
 {
@@ -10,9 +12,9 @@ namespace WpfAppDatagridGroupingHeader
     {
  
         public Vector3D MiddlePipeDirection => InnerModel.MiddlePipeDirection;
-        public double MiddlePipeDiameter => InnerModel.MiddlePipeDiameter;
-         
-        public Point3D MiddlePipeEndPoint => InnerModel.MiddlePipeEndPosition;
+        private double MiddlePipeDiameter => InnerModel.MiddlePipeDiameter;
+
+        private Point3D MiddlePipeEndPoint => InnerModel.MiddlePipeEndPosition;
          
 
         public override void AppearanceChanged(string caller = null)

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Media.Media3D;
+using WpfAppDatagridGroupingHeader.Models;
 using WpfAppDatagridGroupingHeader.Models3D;
 
 namespace WpfAppDatagridGroupingHeader

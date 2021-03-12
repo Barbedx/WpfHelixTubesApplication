@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
+using WpfAppDatagridGroupingHeader.Models;
 
 namespace WpfAppDatagridGroupingHeader.Models3D
 {
@@ -10,9 +11,9 @@ namespace WpfAppDatagridGroupingHeader.Models3D
         }
 
         protected double Diameter => InnerModel.Diameter;
-        public Point3D Position => InnerModel.StartPosition; 
-        public double Height => InnerModel.Height; 
-        public double Offset => InnerModel.Offset; 
+        protected Point3D Position => InnerModel.StartPosition;
+        protected double Height => InnerModel.Height;
+        protected double Offset => InnerModel.Offset; 
         public override void AppearanceChanged(string caller = null)
         {
             var ep = new Point3D(Position.X, Position.Y, Position.Z);

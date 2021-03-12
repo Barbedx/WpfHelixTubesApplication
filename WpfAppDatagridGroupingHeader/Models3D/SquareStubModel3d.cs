@@ -1,8 +1,9 @@
 ﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
 using WpfAppDatagridGroupingHeader.Extensions;
+using WpfAppDatagridGroupingHeader.Models;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models3D
 {
     public class SquareStubModel3d : ItemModel3D<SquareStubModel>
     {
@@ -10,12 +11,11 @@ namespace WpfAppDatagridGroupingHeader
         {
         }
         private  Point3D Position => InnerModel.StartPosition;
-        public Vector3D Direction => InnerModel.Direction;
-        public Vector3D DirectionY => InnerModel.DirectionY;
-        public double XLength => InnerModel.XLength;
-        public double YLength => InnerModel.YLength;
-        public double ZLength => InnerModel.ZLength;
-        public BoxFaces Faces => InnerModel.Faces;
+        private Vector3D Direction => InnerModel.Direction; 
+        private double XLength => InnerModel.XLength;
+        private double YLength => InnerModel.YLength;
+        private double ZLength => InnerModel.ZLength;
+        private BoxFaces Faces => InnerModel.Faces;
         public override void AppearanceChanged(string caller = null)
         {
             var gb = new MeshBuilder(); 

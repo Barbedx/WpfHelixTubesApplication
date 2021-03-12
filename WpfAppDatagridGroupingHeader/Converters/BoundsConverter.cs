@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Media3D;
 
@@ -16,8 +12,7 @@ namespace WpfAppDatagridGroupingHeader.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var visual = value as Visual3D;
-            return visual != null ? visual.FindBounds(Transform3D.Identity) : Rect3D.Empty;
+            return value is Visual3D visual ? visual.FindBounds(Transform3D.Identity) : Rect3D.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

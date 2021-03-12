@@ -16,14 +16,14 @@
         <local:UnitsConverter x:Key="UnitConverter" />
 
         <converters:BoundsConverter x:Key="BoundsConverter" />
-
-        <local:DataTemplate3D x:Key="BillboardTemplate">
-            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Id}" DepthOffset="0.1">
-                <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetY="{Binding Diameter}" />
-                </ModelVisual3D.Transform>
-            </h:BillboardTextVisual3D>
-        </local:DataTemplate3D>
+        <!-- -->
+        <!-- <local:DataTemplate3D x:Key="BillboardTemplate"> -->
+        <!--     <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Id}" DepthOffset="0.1"> -->
+        <!--         <ModelVisual3D.Transform> -->
+        <!--             <TranslateTransform3D OffsetY="{Binding Diameter}" /> -->
+        <!--         </ModelVisual3D.Transform> -->
+        <!--     </h:BillboardTextVisual3D> -->
+        <!-- </local:DataTemplate3D> -->
 
     </Window.Resources>
 
@@ -39,6 +39,7 @@
             <Button Click="Add_Curved_pipe">Add curved pipe</Button>
             <Button Click="Add_squere_stub">Add squeare stub</Button>
             <Button Click="Add_FakePillow">Add fake Pipe</Button>
+            <Button Click="Add_tee_pipe">Add tee Pipe</Button>
             <TextBlock>Items count:</TextBlock>
             <TextBlock Text="{Binding Items.Count}" />
         </ToolBar>

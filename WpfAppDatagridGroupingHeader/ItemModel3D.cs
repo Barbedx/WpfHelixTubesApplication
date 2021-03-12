@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using WpfAppDatagridGroupingHeader.Models3D;
 
 namespace WpfAppDatagridGroupingHeader
 {

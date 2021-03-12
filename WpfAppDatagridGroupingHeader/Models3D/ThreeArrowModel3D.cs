@@ -1,12 +1,12 @@
 ﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
+using WpfAppDatagridGroupingHeader.Models;
 
 namespace WpfAppDatagridGroupingHeader.Models3D
 {
     internal class ThreeArrowModel3D :  ArrowModel3D<ThreeArrowItemModel>
     {
-
-        public Vector3D Direction => InnerModel.Direction; 
+        private Vector3D Direction => InnerModel.Direction; 
          
 
         public override void AppearanceChanged(string caller = null)

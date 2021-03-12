@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
-using System.Windows.Media.Media3D;
+﻿using System.Windows.Media.Media3D;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models3D
 {
     public   interface IItemModel3D<out T> where T: ItemModel
     {

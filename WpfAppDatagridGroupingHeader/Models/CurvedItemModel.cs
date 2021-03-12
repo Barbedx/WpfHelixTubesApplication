@@ -1,20 +1,13 @@
-﻿using System.Windows;
-using System.Windows.Media.Media3D;
+﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models
 {
     public class CurvedItemModel : ItemModel
     {
         public CurvedItemModel(int iD) : base(iD)
         {
-        }
-        public CurvedItemModel(int id, Vector3D startDirection, double length, Vector3D endDirection):base(id)
-        {
-            this.StartDirection = startDirection;
-            this.Length = length;
-            this.EndDirection = endDirection;
-        }
+        } 
         private Vector3D startDirection;
 
         public Vector3D StartDirection
@@ -174,16 +167,9 @@ namespace WpfAppDatagridGroupingHeader
             get { return direction; }
             set { this.SetValue(ref direction, value); }
         }
-
-        private Vector3D ydirection;
+ 
         private BoxFaces faces;
-
-        public Vector3D DirectionY {
-
-            get { return ydirection; }
-            set { this.SetValue(ref ydirection, value); }
-        
-        }
+ 
 
         public BoxFaces Faces {    get { return faces; }
             set { this.SetValue(ref faces, value); }

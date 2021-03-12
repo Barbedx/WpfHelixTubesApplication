@@ -1,18 +1,12 @@
 ﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
+using WpfAppDatagridGroupingHeader.Models;
 
 namespace WpfAppDatagridGroupingHeader.Models3D
 {
     internal class ValveModel3D : PipeModel3D<ValveItemModel>
     {
- 
-        //
-        // public ValveModel3D(Point3D startPosition, Point3D endPosition, double diameter, TubeStabs tubeStabs = TubeStabs.None) 
-        //     : base(startPosition, endPosition, diameter, tubeStabs)
-        // { 
-        // }
   
-
         public override void AppearanceChanged(string caller = null)
         {
             var mb = new MeshBuilder();

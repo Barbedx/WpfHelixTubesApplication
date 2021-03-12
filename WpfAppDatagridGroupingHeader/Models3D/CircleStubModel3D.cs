@@ -1,13 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Media.Media3D;
-using geo = GeometRi;
-
+﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
 using WpfAppDatagridGroupingHeader.Extensions;
-using System.Numerics;
-using System;
+using WpfAppDatagridGroupingHeader.Models;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models3D
 {
     internal class CircleStubModel3D : ItemModel3D<CircleStubModel>
     {

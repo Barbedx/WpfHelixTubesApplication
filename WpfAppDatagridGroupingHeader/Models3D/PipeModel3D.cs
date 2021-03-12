@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Media.Media3D;
-using System.Numerics;
+﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
-using WpfAppDatagridGroupingHeader.Helpers;
-using System.Linq;
-using System.Windows.Media;
-using System;
-using WpfAppDatagridGroupingHeader.Extensions;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models3D
 {
     public enum TubeStabs
     {
@@ -22,8 +14,9 @@ namespace WpfAppDatagridGroupingHeader
     internal class PipeModel3D<T> : ItemModel3D<T> where T:ItemModel
     {
 
-        #region properties 
-        public Point3D StartPosition => InnerModel.StartPosition;
+        #region properties
+
+        protected Point3D StartPosition => InnerModel.StartPosition;
  
         public Point3D EndPosition => InnerModel.EndPosition;
  
@@ -45,8 +38,8 @@ namespace WpfAppDatagridGroupingHeader
                    diameter: this.Diameter,
                    thetaDiv: ThetaDiv,
                    isTubeClosed: false,
-                   TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.FrontCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All,
-                   TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.BackCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All
+                   TubeStabs == TubeStabs.FrontCap|| TubeStabs == TubeStabs.All,
+                   TubeStabs == TubeStabs.BackCap|| TubeStabs == TubeStabs.All
                    );
             GeometryModel3D.Geometry = gb.ToMesh();
         }
