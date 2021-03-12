@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Media.Media3D;
+using WpfAppDatagridGroupingHeader.Models3D;
 
 namespace WpfAppDatagridGroupingHeader
 {
@@ -19,26 +20,31 @@ namespace WpfAppDatagridGroupingHeader
             {
                 switch (model)
                 {
-                    case CurvedItemModel curvedItemModel:
-                         return new CurvedPipeModel3D(curvedItemModel);
+                    case CurvedItemModel itemModel:
+                         return new CurvedPipeModel3D(itemModel);
                         break;
                     
-                    case TeePipeItemModel teePipeItemModel:
-                        return new TeePipeModel3D(teePipeItemModel);
+                    case TeePipeItemModel itemModel:
+                        return new TeePipeModel3D(itemModel);
                     
-                    case ThreeArrowItemModel threeArrowItemModel :
-                        return  new ThreeArrowModel3D(threeArrowItemModel);
+                    case ThreeArrowItemModel itemModel:
+                        return  new ThreeArrowModel3D(itemModel);
                     
-                    case ArrowItemModel arrowModel3D:
-                        return  new ArrowModel3D<ArrowItemModel>(arrowModel3D);
+                    case FakePillarModel itemModel:
+                        return  new FakePillarModel3D(itemModel);
                     
-                    case ValveItemModel valveItemModel:
-                        return  new ValveModel3D(valveItemModel);
+                    case ArrowItemModel itemModel:
+                        return  new ArrowModel3D<ArrowItemModel>(itemModel);
                     
-                    case CircleStubModel circleStubModel:
-                        return  new CircleStubModel3D(circleStubModel);
-                    
-                       
+                    case ValveItemModel itemModel:
+                        return  new ValveModel3D(itemModel);
+
+                    case CircleStubModel itemModel:
+                        return new CircleStubModel3D(itemModel);
+
+                    case SquareStubModel itemModel:
+                        return new SquareStubModel3d(itemModel);
+                 
                     default:
                         return  new PipeModel3D<ItemModel> (model);
                         break;
@@ -47,7 +53,7 @@ namespace WpfAppDatagridGroupingHeader
                 itemModel3D.AppearanceChanged();
             }
             else
-                throw  new InvalidEnumArgumentException($"Oject {dataContext.GetType()} has no datatamlate");
+                throw  new InvalidEnumArgumentException($@"Object {dataContext.GetType()} has no datatemlate");
             return itemModel3D;
         }
     }

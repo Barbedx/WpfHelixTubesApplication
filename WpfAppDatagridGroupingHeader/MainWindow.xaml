@@ -5,31 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppDatagridGroupingHeader"
         mc:Ignorable="d"
-        
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:h="http://helix-toolkit.org/wpf" xmlns:converters="clr-namespace:WpfAppDatagridGroupingHeader.Converters"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:h="http://helix-toolkit.org/wpf"
+        xmlns:converters="clr-namespace:WpfAppDatagridGroupingHeader.Converters"
         Title="MainWindow" Height="450" Width="800">
+    <!-- DataContext="{Binding RelativeSource={RelativeSource Self}}" -->
     <!--<Window.DataContext>
         <local:MainWindow></local:MainWindow>
     </Window.DataContext>-->
     <Window.Resources>
-         <local:UnitsConverter x:Key="UnitConverter"/>
- 
-        <converters:BoundsConverter x:Key="BoundsConverter"/>
-        
+        <local:UnitsConverter x:Key="UnitConverter" />
+
+        <converters:BoundsConverter x:Key="BoundsConverter" />
+
         <local:DataTemplate3D x:Key="BillboardTemplate">
-            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Id}" DepthOffset="0.1" >
-                 <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetY="{Binding Diameter}"/>
+            <h:BillboardTextVisual3D Position="{Binding EndPosition}" Text="{Binding Id}" DepthOffset="0.1">
+                <ModelVisual3D.Transform>
+                    <TranslateTransform3D OffsetY="{Binding Diameter}" />
                 </ModelVisual3D.Transform>
             </h:BillboardTextVisual3D>
         </local:DataTemplate3D>
- 
+
     </Window.Resources>
 
     <DockPanel Background="blue" LastChildFill="True">
         <ToolBar DockPanel.Dock="Top">
             <ToolBarPanel HorizontalAlignment="Left">
-                <Button Content="Zoom extends" Click="Button_Click_3"/>
+                <Button Content="Zoom extends" Click="Button_Click_3" />
             </ToolBarPanel>
             <Button Click="Button_Click_2">Add tube</Button>
             <Button Click="Add_Arrow_btn">Add arrow</Button>
@@ -37,64 +38,61 @@
             <Button Click="Add_arrows_btn">Add Three arrows</Button>
             <Button Click="Add_Curved_pipe">Add curved pipe</Button>
             <Button Click="Add_squere_stub">Add squeare stub</Button>
-            <Button Click="Add_tee_pipe">Add tee Pipe</Button>
+            <Button Click="Add_FakePillow">Add fake Pipe</Button>
             <TextBlock>Items count:</TextBlock>
-            <TextBlock Text="{Binding Items.Count}"></TextBlock>
+            <TextBlock Text="{Binding Items.Count}" />
         </ToolBar>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical"  DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left">
-                
-            <xctk:PropertyGrid VerticalAlignment="Stretch"  
-                           x:Name="_propGrid"
-                           SelectedObject="{Binding SelectedObject}"
-                            AutoGenerateProperties="True">
-               
-            </xctk:PropertyGrid>
-        </StackPanel>
-            </ScrollViewer>
-        <StackPanel DockPanel.Dock="Left">
-            <TextBlock Text="Angle"></TextBlock>
-            <xctk:DecimalUpDown x:Name="txt_updown" ValueChanged="updown_ValueChanged"></xctk:DecimalUpDown>
-        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+                <xctk:PropertyGrid VerticalAlignment="Stretch"
+                                   SelectedObject="{Binding SelectedObject}"
+                                   AutoGenerateProperties="True" />
+            </StackPanel>
+        </ScrollViewer>
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="2"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="*" /> 
             </Grid.RowDefinitions>
-            <h:HelixViewport3D   Grid.Row="0"
-            ZoomExtentsWhenLoaded="True" 
-            Background="LightGray" 
-            IsHeadLightEnabled="True"
-            ZoomAroundMouseDownPoint="True" 
-            RotateAroundMouseDownPoint="True"
-             
-                         x:Name="viewport"
-                        ShowFrameRate="True"
-                        ShowFieldOfView="True"
-                        ShowCoordinateSystem="True"
-                        ShowViewCube="True" 
-                        InfiniteSpin="True"
-            
-            MouseDown="HelixViewport3D_MouseDown">
-                <h:SunLight/>
+            <h:HelixViewport3D Grid.Row="0"
+                               ZoomExtentsWhenLoaded="True"
+                               Background="LightGray"
+                               IsHeadLightEnabled="True"
+                               ZoomAroundMouseDownPoint="True"
+                               RotateAroundMouseDownPoint="True"
 
-                <h:GridLinesVisual3D Fill="Gray"    />
+                               x:Name="viewport"
+                               ShowFrameRate="True"
+                               ShowFieldOfView="True"
+                               ShowCoordinateSystem="True"
+                               ShowViewCube="True"
+                               InfiniteSpin="True"
+
+                               MouseDown="HelixViewport3D_MouseDown">
+                <h:SunLight />
+
+                <h:GridLinesVisual3D Fill="Gray" />
 
 
-                <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    />
-                <local:ItemsVisual3D ItemsSource="{Binding Items}"   RefreshChildrenOnChange="True" />
+                <!-- <local:ItemsVisual3D ItemsSource="{Binding Items}" ItemTemplate="{StaticResource BillboardTemplate}"    /> -->
+                <local:ItemsVisual3D ItemsSource="{Binding Items}" RefreshChildrenOnChange="True" />
                 <!--<local:ItemsVisual3D ItemsSource="{Binding Items}"  RefreshChildrenOnChange="True" />-->
 
-                <h:BoundingBoxVisual3D BoundingBox="{Binding SelectedObject3D, Converter={StaticResource BoundsConverter}}" Fill="Yellow"  Diameter="0.2"/>
+                <h:BoundingBoxVisual3D
+                    BoundingBox="{Binding SelectedObject3D, Converter={StaticResource BoundsConverter}}" Fill="Yellow"
+                    Diameter="0.2" />
             </h:HelixViewport3D>
 
-            <GridSplitter Grid.Row = "1" ResizeDirection="Rows" Height="4" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
-            <Grid  Grid.Row="3" >
+            <GridSplitter Grid.Row="1" ResizeDirection="Rows" Height="4" Width="auto" HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" Margin="0" />
+            <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -104,19 +102,28 @@
                         <ColumnDefinition Width="{Binding ElementName=Column3, Path=ActualWidth}" />
                         <ColumnDefinition Width="{Binding ElementName=Column4, Path=ActualWidth}" />
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="1" Grid.ColumnSpan="3" BorderBrush="Black" Background="LightGray" HorizontalAlignment="Stretch" BorderThickness="2">
+                    <Border Grid.Column="1" Grid.ColumnSpan="3" BorderBrush="Black" Background="LightGray"
+                            HorizontalAlignment="Stretch" BorderThickness="2">
                         <Label>Super Header!!</Label>
                     </Border>
-                    <Border Grid.Column="4"  BorderBrush="Black" HorizontalAlignment="Stretch" BorderThickness="2">
+                    <Border Grid.Column="4" BorderBrush="Black" HorizontalAlignment="Stretch" BorderThickness="2">
                         <Label>Super Header 2</Label>
                     </Border>
                 </Grid>
-                <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedObject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0"  >
+                <DataGrid ItemsSource="{Binding Items}"
+                          SelectedItem="{Binding SelectedObject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding=  "{Binding StartPosition}" Header="column 1" Width="200" x:Name="Column1" />
-                        <DataGridTextColumn Binding = "{Binding EndPosition}" Header="column 2" Width="80" x:Name="Column2"/>
-                        <DataGridTextColumn Binding = "{Binding InnerValue.StartPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}" Header="column 3" Width="80" x:Name="Column3"/>
-                        <DataGridTextColumn Binding = "{Binding InnerValue.EndPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"  Header="column 4" Width="*" x:Name="Column4"  />
+                        <DataGridTextColumn Binding="{Binding StartPosition}" Header="column 1" Width="200"
+                                            x:Name="Column1" />
+                        <DataGridTextColumn Binding="{Binding EndPosition}" Header="column 2" Width="80"
+                                            x:Name="Column2" />
+                        <DataGridTextColumn
+                            Binding="{Binding StartPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"
+                            Header="column 3" Width="80" x:Name="Column3" />
+                        <DataGridTextColumn
+                            Binding="{Binding EndPosition, Converter={StaticResource UnitConverter}, ConverterParameter=1000}"
+                            Header="column 4" Width="*" x:Name="Column4" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

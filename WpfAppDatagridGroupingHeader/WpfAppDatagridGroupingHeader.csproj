@@ -87,11 +87,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArrowModel3D.cs" />
+    <Compile Include="Models3D\ArrowModel3D.cs" />
+    <Compile Include="Models3D\CircleStubModel3D.cs" />
+    <Compile Include="Models3D\CurvedPipeModel3D.cs" />
+    <Compile Include="Models3D\FakePillarModel3D.cs" />
+    <Compile Include="Models3D\IItemModel3D.cs" />
+    <Compile Include="Models3D\PipeModel3D.cs" />
+    <Compile Include="Models3D\SquareStubModel3d.cs" />
+    <Compile Include="Models3D\TeePipeModel3D.cs" />
+    <Compile Include="Models3D\ThreeArrowModel3D.cs" />
+    <Compile Include="Models3D\ValveModel3D.cs" />
     <Compile Include="BindingConverter.cs" />
     <Compile Include="Converters\BoundsConverter.cs" />
-    <Compile Include="CurvedItemModel.cs" />
-    <Compile Include="CurvedPipeModel3D.cs" />
     <Compile Include="DataTemplate3D.cs" />
     <Compile Include="DataTemplateSelector3D.cs" />
     <Compile Include="DefaultDataTemplateSelctor3D.cs" />
@@ -100,19 +107,14 @@
     <Compile Include="Extensions\PointExtension.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Helpers\Bezier.cs" />
-    <Compile Include="IItemModel3D.cs" />
-    <Compile Include="ItemModel.cs" />
     <Compile Include="ItemModel3D.cs" />
     <Compile Include="ItemsVisual3D.cs" />
     <Compile Include="ModelBase.cs" />
+    <Compile Include="Models\CurvedItemModel.cs" />
+    <Compile Include="Models\ItemModel.cs" />
     <Compile Include="MultiBindingConverter.cs" />
     <Compile Include="MyVisualModel3DDataTemplate.cs" />
-    <Compile Include="PipeModel3D.cs" />
-    <Compile Include="CircleStubModel3D.cs" />
-    <Compile Include="TeePipeModel3D.cs" />
-    <Compile Include="ThreeArrowModel3D.cs" />
     <Compile Include="UnitsConverter.cs" />
-    <Compile Include="ValveModel3D.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

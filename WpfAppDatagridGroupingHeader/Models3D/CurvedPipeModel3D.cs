@@ -46,23 +46,21 @@ namespace WpfAppDatagridGroupingHeader
             // {
             //     return;
             // }
-            var sd = StartDirection.GetNormalized();// StartDirection.Normalize();
-            var ed = EndDirection.GetNormalized();// .Normalize();
+            var sd = StartDirection.GetNormalized(); //Нормализированые векторы 
+            var ed = EndDirection.GetNormalized(); 
             var vector = sd + ed;
-            vector *= Length;
-            var ep = StartPosition + vector;
-            //EndPosition = ep; //TODO:Check if we need it ??
-
+            vector *= Length; //Вектор хорды
+            var ep = StartPosition + vector; //конечная точка 
+            
             var l = new geo.Line3d(StartPosition.ToGeometRIPoint3D(), sd.ToGeometRIVector3D());
-            var l2 = new geo.Line3d(EndPosition.ToGeometRIPoint3D(), ed.ToGeometRIVector3D());
-            var intersectionPoint = l.IntersectionWith(l2);
+            var l2 = new geo.Line3d(ep.ToGeometRIPoint3D(), ed.ToGeometRIVector3D());
+            var intersectionPoint = l.IntersectionWith(l2); //Точка пересечений линий
 
             if (intersectionPoint is geo.Point3d interPoint)
             {
-               quadraticCurvedPosition= interPoint.ToPoint3D();// new Point3D(interPoint.X, interPoint.Y, interPoint.Z); 
+               quadraticCurvedPosition= interPoint.ToPoint3D();
 
-                var bezier = new Bezier(StartPosition, QuadraticCurvedPosition, ep, 100);
-
+                var bezier = new Bezier(StartPosition, QuadraticCurvedPosition, ep, 100); 
                 var pts = bezier.points.Select(x => x.ToPoint3D()).ToArray();
 
                 var gb = new MeshBuilder();

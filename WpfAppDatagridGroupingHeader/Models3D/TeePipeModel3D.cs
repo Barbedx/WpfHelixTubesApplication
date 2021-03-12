@@ -10,7 +10,7 @@ namespace WpfAppDatagridGroupingHeader
     {
  
         public Vector3D MiddlePipeDirection => InnerModel.MiddlePipeDirection;
-        
+        public double MiddlePipeDiameter => InnerModel.MiddlePipeDiameter;
          
         public Point3D MiddlePipeEndPoint => InnerModel.MiddlePipeEndPosition;
          
@@ -26,11 +26,11 @@ namespace WpfAppDatagridGroupingHeader
                    TubeStabs == TubeStabs.FrontCap || TubeStabs == TubeStabs.All,
                    TubeStabs == TubeStabs.BackCap || TubeStabs == TubeStabs.All
                    );
- 
-           var middlePosition = (EndPosition - StartPosition) / 2;
+
+            var middlePosition = StartPosition.GetMidPointTo(EndPosition);
            
-           gb.AddTube(path: new Point3D[] { middlePosition.ToPoint3D(), MiddlePipeEndPoint },
-                diameter: this.Diameter,
+           gb.AddTube(path: new Point3D[] { middlePosition, MiddlePipeEndPoint },
+                diameter: this.MiddlePipeDiameter,
                 thetaDiv: ThetaDiv,
                 isTubeClosed: false);
              

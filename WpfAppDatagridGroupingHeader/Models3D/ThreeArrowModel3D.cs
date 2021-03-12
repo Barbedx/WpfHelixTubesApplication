@@ -1,10 +1,7 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media.Media3D;
-
+﻿using System.Windows.Media.Media3D;
 using HelixToolkit.Wpf;
 
-namespace WpfAppDatagridGroupingHeader
+namespace WpfAppDatagridGroupingHeader.Models3D
 {
     internal class ThreeArrowModel3D :  ArrowModel3D<ThreeArrowItemModel>
     {

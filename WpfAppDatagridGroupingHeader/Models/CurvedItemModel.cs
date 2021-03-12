@@ -1,4 +1,6 @@
-﻿using System.Windows.Media.Media3D;
+﻿using System.Windows;
+using System.Windows.Media.Media3D;
+using HelixToolkit.Wpf;
 
 namespace WpfAppDatagridGroupingHeader
 {
@@ -61,6 +63,12 @@ namespace WpfAppDatagridGroupingHeader
         }
          
     }
+    internal class FakePillarModel : ArrowItemModel
+    {
+        public FakePillarModel(int iD) : base(iD)
+        {
+        }
+    }
     public class CircleStubModel : ItemModel
     {
         public CircleStubModel(int iD) : base(iD)
@@ -90,13 +98,21 @@ namespace WpfAppDatagridGroupingHeader
         }
 
         private Vector3D middlePipeDirection;
+        private double middlePipeDiameter;
 
         public Vector3D MiddlePipeDirection
         {
             get { return middlePipeDirection; }
             set { this.SetValue(ref middlePipeDirection, value); }
         }
-         
+
+        public double MiddlePipeDiameter
+        {
+            
+            get { return middlePipeDiameter; }
+            set { this.SetValue(ref middlePipeDiameter, value); }
+            
+        }
     }
     public class ThreeArrowItemModel : ArrowItemModel
     {
@@ -121,5 +137,60 @@ namespace WpfAppDatagridGroupingHeader
         }
     }
     
+    public class SquareStubModel : ItemModel
+    {
+        public SquareStubModel(int iD) : base(iD)
+        {
+        }
+        private int xLength;
+
+        public int XLength
+        {
+            get { return xLength; }
+            set { this.SetValue(ref xLength, value); }
+        }
+
+        private int yLength;
+
+        public int YLength
+        {
+            get { return yLength; }
+            set { this.SetValue(ref yLength, value); }
+        }
+
+        private int zLength;
+
+        public int ZLength
+        {
+            get { return zLength; }
+            set { this.SetValue(ref zLength, value); }
+        }
+
+
+        private Vector3D direction;
+
+        public Vector3D Direction
+        {
+            get { return direction; }
+            set { this.SetValue(ref direction, value); }
+        }
+
+        private Vector3D ydirection;
+        private BoxFaces faces;
+
+        public Vector3D DirectionY {
+
+            get { return ydirection; }
+            set { this.SetValue(ref ydirection, value); }
+        
+        }
+
+        public BoxFaces Faces {    get { return faces; }
+            set { this.SetValue(ref faces, value); }
+        }
+        
+
+    }
+   
 
 }

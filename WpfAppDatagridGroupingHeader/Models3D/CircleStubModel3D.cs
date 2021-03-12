@@ -9,16 +9,13 @@ using System;
 
 namespace WpfAppDatagridGroupingHeader
 {
-
-
     internal class CircleStubModel3D : ItemModel3D<CircleStubModel>
     {
- 
-        public double Radius => InnerModel.Radius;
-         
-        public Vector3D Direction => InnerModel.Direction;
-  
-        public Point3D Position => InnerModel.StartPosition; 
+        private double Radius => InnerModel.Diameter/2;
+
+        private Vector3D Direction => InnerModel.Direction;
+
+        private Point3D Position => InnerModel.StartPosition; 
  
 
 

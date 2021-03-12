@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
-
+using Xceed.Wpf.Toolkit.Core.Converters;
 using geo=  GeometRi;
 
 namespace WpfAppDatagridGroupingHeader.Extensions
@@ -44,6 +44,11 @@ public    static  class PointExtension
         public static geo.Vector3d ToGeometRIVector3D(this Vector3D v)
         {
             return new geo.Vector3d(v.X, v.Y, v.Z);
+        }
+
+        public static Point3D GetMidPointTo(this Point3D p1, Point3D p2)
+        { 
+            return     new Point3D((p1.X+p2.X)/2,(p1.Y+p2.Y)/2,(p1.Z+p2.Z)/2 );
         }
     }
 }

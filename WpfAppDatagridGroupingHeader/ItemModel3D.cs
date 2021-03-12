@@ -9,7 +9,7 @@ namespace WpfAppDatagridGroupingHeader
 {
     public abstract class ItemModel3D<T> : UIElement3D ,IItemModel3D<T> where T : ItemModel, INotifyPropertyChanged
     {
-        public T InnerModel { get; protected set; }
+        public T InnerModel { get; }
 
         public ItemModel3D(T model)
         {
@@ -18,10 +18,10 @@ namespace WpfAppDatagridGroupingHeader
             GeometryModel3D.Material = MaterialHelper.CreateMaterial(GradientBrushes.BlueWhiteRed);
             this.Visual3DModel = GeometryModel3D;
             this.InnerModel = model;
-            model.PropertyChanged += Model_PropertyChanged;
+            model.PropertyChanged += Model_PropertyChanged; 
             
-            AppearanceChanged("base_ctor");
-
+            // ReSharper disable once VirtualMemberCallInConstructor -- no one constructor else
+            AppearanceChanged("base_ctor"); 
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

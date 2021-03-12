@@ -48,7 +48,6 @@ namespace WpfAppDatagridGroupingHeader
                    TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.FrontCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All,
                    TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.BackCap|| TubeStabs == WpfAppDatagridGroupingHeader.TubeStabs.All
                    );
- 
             GeometryModel3D.Geometry = gb.ToMesh();
         }
 
